@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3f8d8cf3a5c8544a7bdf09f89d9fae, type: 3}
   m_Name: DeliverPackageTask
   m_EditorClassIdentifier: 
-  <id>k__BackingField: 
-  displayName: 
-  hasActiveTask: 0
+  <id>k__BackingField: DeliverPackageTask
+  displayName: Deliver a package
+  maximumTasks: 3
   taskPrerequisites: []
-  taskStepPrefabs: []
-  moneyReward: 0
-  timeReward: 0
+  taskStepPrefabs:
+  - {fileID: 14595369499395361, guid: 5409826938d2b27418cfc57d3567f3c0, type: 3}
+  moneyReward: 100
+  timeReward: 30

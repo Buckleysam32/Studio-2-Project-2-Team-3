@@ -12,6 +12,8 @@ public class GameEventsManager : MonoBehaviour
 
     public RewardEvents rewardEvents;
 
+    public InputEvents inputEvents;
+
     private void Awake()
     {
         if (instance != null)
@@ -24,6 +26,7 @@ public class GameEventsManager : MonoBehaviour
         //initialise all the events
         taskEvents = new TaskEvents();
         rewardEvents = new RewardEvents();
+        inputEvents = new InputEvents();
     }
 
 }

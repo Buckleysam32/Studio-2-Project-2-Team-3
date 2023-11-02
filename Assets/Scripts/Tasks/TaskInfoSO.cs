@@ -14,7 +14,7 @@ public class TaskInfoSO : ScriptableObject
 
     [Header("Requirements")]
 
-    public bool hasActiveTask; // is there currently an active task
+    public int maximumTasks; // how many tasks can be taken at once
 
     public TaskInfoSO[] taskPrerequisites; // the tasks needed to be completed before starting this task
 

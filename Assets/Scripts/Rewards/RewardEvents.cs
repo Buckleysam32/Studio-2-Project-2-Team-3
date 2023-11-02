@@ -26,7 +26,7 @@ public class RewardEvents
 
     public event Action<float> onTimeGained;
 
-    public void TimeGained(int time)
+    public void TimeGained(float time)
     {
         if (onTimeGained != null)
         {

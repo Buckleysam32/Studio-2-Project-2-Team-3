@@ -5,16 +5,22 @@ using UnityEngine;
 public abstract class TaskStep : MonoBehaviour
 {
     private bool isFinished = false;
+    private string taskId;
 
-    protected void FinishTask()
+    public void InitialiseTaskStep(string taskId)
+    {
+        this.taskId = taskId;
+    }
+
+    protected void FinishTaskStep()
     {
         if (!isFinished)
         {
             isFinished = true;
-
-            // To do: advance the task forward now that we've finished this particular step
-
+            GameEventsManager.instance.taskEvents.AdvanceTask(taskId);
             Destroy(this.gameObject);
         }
     }
+
+
 }
