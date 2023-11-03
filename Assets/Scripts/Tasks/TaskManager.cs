@@ -162,6 +162,7 @@ public class TaskManager : MonoBehaviour
 
     private void CompleteTask(string id)
     {
+        numberOfTasks--; // this can be removed later when the number of tasks can be found from its array size
         Task task = GetTaskById(id);
         ClaimRewards(task);
         ChangeTaskState(task.info.id, TaskState.Finished);
