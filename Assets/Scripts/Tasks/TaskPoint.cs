@@ -14,7 +14,6 @@ public class TaskPoint : MonoBehaviour
     private TaskState currentTaskState;
     private TaskIcon taskIcon;
 
-
     [Header("Config")]
     [SerializeField] private bool startPoint = false;
     [SerializeField] private bool endPoint = false;

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
-    public int currentMoney = 100; // how much money the player currently has
-    public float currentTime = 30; // how much game time is left
+    public int currentMoney = 0; // how much money the player currently has
+    public float currentTime = 30f; // how much game time is left
 
     private void OnEnable()
     {

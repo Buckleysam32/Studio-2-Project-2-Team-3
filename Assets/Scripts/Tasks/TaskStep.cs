@@ -16,7 +16,6 @@ public abstract class TaskStep : MonoBehaviour
         {
             SetTaskStepState(taskStepState);
         }
-
     }
 
     protected void FinishTaskStep()
