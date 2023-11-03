@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
 {
+    [Header("Config")]
+    [SerializeField] private bool loadTaskState = true;
+
+    private Dictionary<string, Task> taskMap;
+
     // task start requirements
     private int numberOfTasks; // how many tasks we currently have active, this can later be an array of tasks we check the size of to find out
-    // there may be some other requirements later
-    
-    private Dictionary<string, Task> taskMap;
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class TaskManager : MonoBehaviour
         GameEventsManager.instance.taskEvents.onAdvanceTask += AdvanceTask;
         GameEventsManager.instance.taskEvents.onTaskCompleted += CompleteTask;
         GameEventsManager.instance.taskEvents.onTaskFailed += FailTask;
-
+        GameEventsManager.instance.taskEvents.onTaskStepStateChange += TaskStepStateChange;
     }
 
     private void OnDisable()
@@ -31,15 +33,22 @@ public class TaskManager : MonoBehaviour
         GameEventsManager.instance.taskEvents.onAdvanceTask += AdvanceTask;
         GameEventsManager.instance.taskEvents.onTaskCompleted -= CompleteTask;
         GameEventsManager.instance.taskEvents.onTaskFailed -= FailTask;
+        GameEventsManager.instance.taskEvents.onTaskStepStateChange -= TaskStepStateChange;
     }
 
 
 
     private void Start()
     {
-        //broadcast the initial state of all quests on startup
         foreach (Task task in taskMap.Values)
         {
+            // initialize any loaded task steps
+            if (task.state == TaskState.InProgress)
+            {
+                task.InstantiateCurrentQuestStep(this.transform);
+            }
+
+            //broadcast the initial state of all quests on startup
             GameEventsManager.instance.taskEvents.TaskStateChange(task);
         }
     }
@@ -69,7 +78,7 @@ public class TaskManager : MonoBehaviour
             {
                 Debug.LogWarning("Duplicate ID found when creating task map: " + taskInfo.id);
             }
-            idToTaskMap.Add(taskInfo.id, new Task(taskInfo));
+            idToTaskMap.Add(taskInfo.id, LoadTask(taskInfo));
         }
         return idToTaskMap;
     }
@@ -91,6 +100,11 @@ public class TaskManager : MonoBehaviour
         GameEventsManager.instance.taskEvents.TaskStateChange(task);
     }
 
+    /// <summary>
+    /// Checks the requirements to start a new task
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns></returns>
     private bool CheckRequirementsMet(Task task)
     {
         // start true and prove to be false
@@ -153,6 +167,13 @@ public class TaskManager : MonoBehaviour
         ChangeTaskState(task.info.id, TaskState.Finished);
     }
 
+    private void TaskStepStateChange(string id, int stepIndex, TaskStepState taskStepState)
+    {
+        Task task = GetTaskById(id);
+        task.StoreTaskStepState(taskStepState, stepIndex);
+        ChangeTaskState(id, task.state);
+    }
+
     private void ClaimRewards(Task task)
     {
         GameEventsManager.instance.rewardEvents.MoneyGained(task.info.moneyReward);
@@ -164,4 +185,59 @@ public class TaskManager : MonoBehaviour
         // To Do: Fail the task
         Debug.Log("Fail Task: " + id);
     }
+
+
+    private void OnApplicationQuit()
+    {
+        foreach (Task task in taskMap.Values)
+        {
+            SaveTask(task);
+        }
+    }
+
+    private void SaveTask(Task task)
+    {
+        try
+        {
+            TaskData taskData = task.GetTaskData();
+            // serialize using JsonUtility
+            string serializedData = JsonUtility.ToJson(taskData);
+            // saving to playerPrefs as a quick solution but could potentially save to file if necessary
+            PlayerPrefs.SetString(task.info.id, serializedData);
+
+            //Debug.Log(serializedData);
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError("Failed to save task with id " + task.info.id + ": " + e);
+        }
+    }
+
+    private Task LoadTask(TaskInfoSO taskInfo)
+    {
+        Task task = null;
+
+        try
+        {
+            // load task from saved data
+            if (PlayerPrefs.HasKey(taskInfo.id) && loadTaskState)
+            {
+                string serializedData = PlayerPrefs.GetString(taskInfo.id);
+                TaskData taskData = JsonUtility.FromJson<TaskData>(serializedData);
+                task = new Task(taskInfo, taskData.state, taskData.taskStepIndex, taskData.taskStepStates);
+            }
+            // otherwise, initialize a new quest
+            else
+            {
+                task = new Task(taskInfo);
+            }
+
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError("Failed to load task with id " + task.info.id + ": " + e);
+        }
+        return task;
+    }
+
 }

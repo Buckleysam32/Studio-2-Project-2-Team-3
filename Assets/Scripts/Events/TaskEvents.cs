@@ -18,13 +18,13 @@ public class TaskEvents
         }
     }
 
-    public event Action<string> onPackageDelivery;
+    public event Action onPackageDelivery;
 
-    public void PackageDelivery(string id)
+    public void PackageDelivery()
     {
         if (onPackageDelivery != null)
         {
-            onPackageDelivery(id);
+            onPackageDelivery();
         }
     }
 
@@ -77,6 +77,19 @@ public class TaskEvents
         if (onTaskStateChange != null)
         {
             onTaskStateChange(task);
+        }
+    }
+
+    public event Action<string, int, TaskStepState> onTaskStepStateChange;
+    /// <summary>
+    /// called when the state of a task step changes
+    /// </summary>
+    /// <param name="task"></param>
+    public void TaskStepStateChange(string id, int stepIndex, TaskStepState taskStepState)
+    {
+        if (onTaskStepStateChange != null)
+        {
+            onTaskStepStateChange(id, stepIndex, taskStepState);
         }
     }
 }

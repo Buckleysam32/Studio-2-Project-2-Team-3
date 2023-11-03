@@ -58,16 +58,10 @@ public class TaskPoint : MonoBehaviour
         {
             GameEventsManager.instance.taskEvents.StartTask(taskId);
         }
-        else if (currentTaskState.Equals(TaskState.InProgress) && endPoint)
-        {
-            GameEventsManager.instance.taskEvents.PackageDelivery(taskId);
-        }
         else if (currentTaskState.Equals(TaskState.CanFinish) && endPoint)
         {
             GameEventsManager.instance.taskEvents.CompleteTask(taskId);
         }
-        
-
     }
 
     private void TaskStateChange(Task task)
@@ -86,6 +80,7 @@ public class TaskPoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNear = true;
+            taskIcon.SetState(currentTaskState, startPoint, endPoint);
         }
     }
 
@@ -94,6 +89,7 @@ public class TaskPoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNear = false;
+            taskIcon.SetState(currentTaskState, startPoint, endPoint);
         }
     }
 }
