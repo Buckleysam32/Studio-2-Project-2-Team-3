@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+
 public class DeliverPackageTaskStep : TaskStep
 {
     //the transform on the DeliverPackageTask Prefab will be the delivery location
 
     private int amountToDeliver = 2;
     private int packagesDelivered = 0;
+
+    public StartPoint startPoint;
+
 
     private void OnEnable()
     {
@@ -25,6 +28,8 @@ public class DeliverPackageTaskStep : TaskStep
     /// </summary>
     public void DeliverPackage()
     {
+        startPoint.hasPackage = false;
+
         if (packagesDelivered < amountToDeliver)
         {
             packagesDelivered++;
@@ -37,14 +42,7 @@ public class DeliverPackageTaskStep : TaskStep
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            //change this to enabling the option to deliver upon submit being pressed
-            GameEventsManager.instance.taskEvents.PackageDelivery();
-        }
-    }
+
 
 
     private void UpdateState()
