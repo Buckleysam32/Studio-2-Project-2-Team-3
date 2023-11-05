@@ -29,7 +29,7 @@ public class CameraSystem : MonoBehaviour
     {
         Vector3 movePosition = playerTransform.position + offset;
         transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
-        playerZoom = playerRB.velocity.magnitude / 10 + 8f;
+        playerZoom = playerRB.velocity.magnitude / 10 + 3f;
         OrthographicCamera.orthographicSize = playerZoom;
     }
 }
