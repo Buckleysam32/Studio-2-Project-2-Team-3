@@ -7,6 +7,8 @@ public class UiManager : MonoBehaviour
 {
     public GameObject continuePanel;
     public GameObject pausePanel;
+    public GameObject instructionPanel;
+    public GameObject gameInformation;
 
     public TMP_Text timerText;
     public TMP_Text moneyText;
@@ -28,6 +30,8 @@ public class UiManager : MonoBehaviour
     {
         continuePanel.SetActive(false);
         pausePanel.SetActive(false);
+        instructionPanel.SetActive(false);
+        gameInformation.SetActive(false);
     }
 
     /// <summary>

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public RewardManager rewardManager;
     public UiManager uiManager;
+    private Coroutine startRoutine;
+    public PlayerController playerController;
 
     private void OnEnable()
     {
@@ -27,18 +29,38 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen
-
+        Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen      
         GameEventsManager.instance.gameEvents.GameStart();
     }
 
     private void GameStart()
     {
-        //maybe wait for a few seconds
-        // do a count down?
-        // then start the timer
-        GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
+        startRoutine = StartCoroutine(StartRoutine());
+        
     }
+
+    IEnumerator StartRoutine()
+    {
+        // take away movement from player
+        float tempMaxSpeed = playerController.maxSpeed;
+        playerController.maxSpeed = 0;
+        //show instructions
+        uiManager.instructionPanel.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        // get rid of instructions
+        uiManager.instructionPanel.SetActive(false);
+        // turn on game information UI
+        uiManager.gameInformation.SetActive(true);
+        // reset max speed
+        playerController.maxSpeed = tempMaxSpeed;
+        //start timer
+        GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
+
+        yield return null;
+    }
+
 
     #region Game Over
     private void ContinuePrompt()
