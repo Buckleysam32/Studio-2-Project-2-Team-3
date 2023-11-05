@@ -8,9 +8,9 @@ public class Task
     // static info
     public TaskInfoSO info;
 
-    // static info
+    public bool taskActive; // has the task manager enabled this task so it can be started
     public TaskState state;
-    private int currentTaskStepIndex;
+    public int currentTaskStepIndex;
     private TaskStepState[] taskStepStates;
 
     public Task(TaskInfoSO taskInfo)
@@ -25,9 +25,10 @@ public class Task
         }
     }
 
-    public Task(TaskInfoSO taskInfo, TaskState taskState, int currentTaskStepIndex, TaskStepState[] taskStepStates)
+    public Task(TaskInfoSO taskInfo,bool taskActive, TaskState taskState, int currentTaskStepIndex, TaskStepState[] taskStepStates)
     {
         this.info = taskInfo;
+        this.taskActive = taskActive; 
         this.state = taskState;
         this.currentTaskStepIndex = currentTaskStepIndex;
         this.taskStepStates = taskStepStates;
@@ -96,6 +97,6 @@ public class Task
 
     public TaskData GetTaskData()
     {
-        return new TaskData(state, currentTaskStepIndex, taskStepStates);
+        return new TaskData(taskActive,state, currentTaskStepIndex, taskStepStates);
     }
 }

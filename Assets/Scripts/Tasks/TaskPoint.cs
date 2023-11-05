@@ -52,7 +52,7 @@ public class TaskPoint : MonoBehaviour
             return;
         }
 
-        // start, progress or finish a task
+        // start or finish a task
         if (currentTaskState.Equals(TaskState.CanStart) && startPoint)
         {
             GameEventsManager.instance.taskEvents.StartTask(taskId);

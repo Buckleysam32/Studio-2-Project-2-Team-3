@@ -7,11 +7,13 @@ public class TaskManager : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] private bool loadTaskState = true;
+    [SerializeField] private int maximumActiveTasks = 1;
 
-    private Dictionary<string, Task> taskMap;
+    private Dictionary<string, Task> taskMap; // this is a dictionary of ALL possible tasks
 
     // task start requirements
-    private int numberOfTasks; // how many tasks we currently have active, this can later be an array of tasks we check the size of to find out
+    private List<Task> activeTasks = new List<Task>(); // this is list of only the ACTIVE tasks
+    private List<Task> innactiveTasks = new List<Task>(); // this is a list of the innactive tasks
 
     private void Awake()
     {
@@ -40,21 +42,33 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
+        if (maximumActiveTasks > taskMap.Count)
+        {
+            maximumActiveTasks = taskMap.Count;
+        }
+
         foreach (Task task in taskMap.Values)
         {
+            innactiveTasks.Add(task);
+
             // initialize any loaded task steps
             if (task.state == TaskState.InProgress)
             {
+                SwitchTaskList(task);
                 task.InstantiateCurrentQuestStep(this.transform);
             }
 
             //broadcast the initial state of all quests on startup
             GameEventsManager.instance.taskEvents.TaskStateChange(task);
         }
+
+        MaintainActiveTasks();
     }
 
     private void Update()
     {
+
+
         // loop through ALL tasks
         foreach (Task task in taskMap.Values)
         {
@@ -111,8 +125,14 @@ public class TaskManager : MonoBehaviour
 
         bool meetsRequirements = true;
 
+        // check if the task has been activated
+        if (!task.taskActive)
+        {
+            meetsRequirements = false;
+        }
+
         //check if we have less than our maximum number of tasks
-        if (numberOfTasks >= task.info.maximumTasks)
+        if (activeTasks.Count >= task.info.maximumTasks)
         {
             meetsRequirements = false;
         }
@@ -131,7 +151,6 @@ public class TaskManager : MonoBehaviour
 
     private void StartTask(string id)
     {
-        numberOfTasks++; // this can be removed later when the number of tasks can be found from its array size
         Task task = GetTaskById(id);
         task.InstantiateCurrentQuestStep(this.transform);
         ChangeTaskState(task.info.id, TaskState.InProgress);
@@ -162,10 +181,14 @@ public class TaskManager : MonoBehaviour
 
     private void CompleteTask(string id)
     {
-        numberOfTasks--; // this can be removed later when the number of tasks can be found from its array size
         Task task = GetTaskById(id);
+        task.taskActive = false;
+        task.currentTaskStepIndex = 0;
+        SwitchTaskList(task);
         ClaimRewards(task);
         ChangeTaskState(task.info.id, TaskState.Finished);
+
+        MaintainActiveTasks(); 
     }
 
     private void TaskStepStateChange(string id, int stepIndex, TaskStepState taskStepState)
@@ -187,7 +210,9 @@ public class TaskManager : MonoBehaviour
         Debug.Log("Fail Task: " + id);
     }
 
+    #region Save/Load
 
+    // currently only saving on application quitting
     private void OnApplicationQuit()
     {
         foreach (Task task in taskMap.Values)
@@ -225,7 +250,7 @@ public class TaskManager : MonoBehaviour
             {
                 string serializedData = PlayerPrefs.GetString(taskInfo.id);
                 TaskData taskData = JsonUtility.FromJson<TaskData>(serializedData);
-                task = new Task(taskInfo, taskData.state, taskData.taskStepIndex, taskData.taskStepStates);
+                task = new Task(taskInfo,taskData.taskActive, taskData.state, taskData.taskStepIndex, taskData.taskStepStates);
             }
             // otherwise, initialize a new quest
             else
@@ -240,5 +265,41 @@ public class TaskManager : MonoBehaviour
         }
         return task;
     }
+    #endregion
 
+    private void ActivateTask(Task task)
+    {
+        task.taskActive = true;
+    }
+    private void SwitchTaskList(Task task)
+    {
+        if (activeTasks.Contains(task))
+        {
+            activeTasks.Remove(task);
+            innactiveTasks.Add(task);
+        }
+        else if (innactiveTasks.Contains(task))
+        {
+            activeTasks.Add(task);
+            innactiveTasks.Remove(task);
+        }
+        else
+        {
+            Debug.LogWarning("ID not found in either task list id: "+ task.info.displayName + ". check if task is initialized in taskMap");
+        }
+    }
+
+    private void MaintainActiveTasks()
+    {
+        if (activeTasks.Count < maximumActiveTasks)
+        {
+            // currently selects a task at random
+            // could potentially prioritise those closest to player 
+            // and check to not enable the most recent completed task
+            Task task = innactiveTasks[Random.Range(0, innactiveTasks.Count)];
+            ActivateTask(task);
+            ChangeTaskState(task.info.id, TaskState.RequirementsNotMet);
+            SwitchTaskList(task);
+        }
+    }
 }

@@ -42,9 +42,6 @@ public class DeliverPackageTaskStep : TaskStep
         }
     }
 
-
-
-
     private void UpdateState()
     {
         string state = packagesDelivered.ToString();
