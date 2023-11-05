@@ -10,9 +10,20 @@ public class ScoreKeeper : MonoBehaviour
     private int highscore1;
     private int highscore2;
 
+    public GameObject highscorePanel;
     public TMP_Text highscore0Text;
     public TMP_Text highscore1Text;
     public TMP_Text highscore2Text;
+
+    public void OnEnable()
+    {
+        GameEventsManager.instance.gameEvents.onSetHighScore += SubmitScore;
+    }
+
+    public void OnDisable()
+    {
+        GameEventsManager.instance.gameEvents.onSetHighScore -= SubmitScore;
+    }
 
     public void Start()
     {
@@ -77,6 +88,15 @@ public class ScoreKeeper : MonoBehaviour
             {
                 PlayerPrefs.SetInt($"Highscore2", scoreList[i]);
             }
+        }
+    }
+
+    private void Update()
+    {
+        
+        if (Input.anyKey && highscorePanel!= null)
+        {
+            highscorePanel.SetActive(false);
         }
     }
 }

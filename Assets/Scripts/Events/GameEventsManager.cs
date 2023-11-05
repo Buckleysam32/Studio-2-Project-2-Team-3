@@ -14,6 +14,10 @@ public class GameEventsManager : MonoBehaviour
 
     public InputEvents inputEvents;
 
+    public GameEvents gameEvents;
+
+    public UiEvents uiEvents;
+
     private void Awake()
     {
         if (instance != null)
@@ -27,6 +31,8 @@ public class GameEventsManager : MonoBehaviour
         taskEvents = new TaskEvents();
         rewardEvents = new RewardEvents();
         inputEvents = new InputEvents();
+        gameEvents = new GameEvents();
+        uiEvents = new UiEvents();
     }
 
 }

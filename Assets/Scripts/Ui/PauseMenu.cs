@@ -7,17 +7,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject pausePanel;
     public bool paused = false;
 
-    public SceneLoader sceneLoader; // this can get removed when game events is set up
-
     private void OnEnable()
     {
-        //GameEventsManager.instance.inputEvents.onPausePressed += Pause;
-        // need to add onPausedPressed to input events
+        GameEventsManager.instance.inputEvents.onPausePressed += Pause;
     }
 
     private void OnDisable()
     {
-        //GameEventsManager.instance.inputEvents.onPausePressed -= Pause;
+        GameEventsManager.instance.inputEvents.onPausePressed -= Pause;
     }
 
     // Update is called once per frame
@@ -26,14 +23,12 @@ public class PauseMenu : MonoBehaviour
         // need to change this to use the new input system
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            GameEventsManager.instance.inputEvents.PausePressed();
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && paused)
         {
-            //GameEventsManager.instance.gameEvents.QuitGame();
-            sceneLoader.QuitGame();
-            Debug.Log("Quit Game");
+            GameEventsManager.instance.gameEvents.QuitGame();
         }
         
     }

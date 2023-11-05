@@ -18,4 +18,14 @@ public class InputEvents
         }
     }
 
+    public event Action onPausePressed;
+
+    public void PausePressed()
+    {
+        if (onPausePressed != null)
+        {
+            onPausePressed();
+        }
+    }
+
 }

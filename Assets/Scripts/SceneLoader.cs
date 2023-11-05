@@ -7,14 +7,14 @@ public class SceneLoader : MonoBehaviour
 {
     private void OnEnable()
     {
-        //GameEventsManager.instance.gameEvents.LoadScene += LoadScene;
-        //GameEventsManager.instance.gameEvents.QuitGame += QuitGame;
+        GameEventsManager.instance.gameEvents.onLoadScene += LoadScene;
+        GameEventsManager.instance.gameEvents.onQuitGame += QuitGame;
     }
 
     private void OnDisable()
     {
-        //GameEventsManager.instance.gameEvents.LoadScene -= LoadScene;
-        //GameEventsManager.instance.gameEvents.QuitGame -= QuitGame;
+        GameEventsManager.instance.gameEvents.onLoadScene -= LoadScene;
+        GameEventsManager.instance.gameEvents.onQuitGame -= QuitGame;
     }
 
     public void LoadScene(int buildIndex)
@@ -23,6 +23,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void QuitGame()
     {
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 }

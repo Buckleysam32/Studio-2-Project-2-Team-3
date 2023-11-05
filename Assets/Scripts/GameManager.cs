@@ -5,31 +5,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Money")]
-    public int currentMoney = 0;
-    public int continueCost = 500;
-    public float continueTimeGain = 60f; // how much time you get when continuing 
-
-    [Header("Timer")]
-    public float gameTimeLength = 180f; //the lenght of the game in seconds 
-    public float currentSeconds;
-    private Coroutine timer;
-    public TMP_Text timerText;
+    public RewardManager rewardManager;
+    public UiManager uiManager;
 
     private void OnEnable()
     {
-        //GameEventsManager.instance.gameEvents.onGameStart += StartTimer;
-        //GameEventsManager.instance.gameEvents.onGameOver += GameOver;
-        //GameEventsManager.instance.gameEvents.onTimerEnd += ContinuePrompt;
-        //GameEventsManager.instance.gameEvents.onContinueGame += ContinueGame;
+        GameEventsManager.instance.gameEvents.onGameStart += GameStart;
+        GameEventsManager.instance.gameEvents.onGameOver += GameOver;
+        GameEventsManager.instance.gameEvents.onTimerEnd += ContinuePrompt;
+        GameEventsManager.instance.gameEvents.onContinueGame += ContinueGame;
     }
 
     private void OnDisable()
     {
-        //GameEventsManager.instance.gameEvents.onGameStart -= StartTimer;
-        //GameEventsManager.instance.gameEvents.onGameOver -= GameOver;
-        //GameEventsManager.instance.gameEvents.onTimerEnd -= ContinuePrompt;
-        //GameEventsManager.instance.gameEvents.onContinueGame -= ContinueGame;
+        GameEventsManager.instance.gameEvents.onGameStart -= GameStart;
+        GameEventsManager.instance.gameEvents.onGameOver -= GameOver;
+        GameEventsManager.instance.gameEvents.onTimerEnd -= ContinuePrompt;
+        GameEventsManager.instance.gameEvents.onContinueGame -= ContinueGame;
     }
 
     // Start is called before the first frame update
@@ -37,64 +29,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen
 
-        //GameEventsManager.instance.gameEvents.GameStart();
-        StartTimer(gameTimeLength); // can delete this once game events is set up
+        GameEventsManager.instance.gameEvents.GameStart();
     }
 
-    #region Timer
-    // this region can be moved to the reward manager as that should have the money & time related functions
-
-
-    /// <summary>
-    /// Starts the timer if one doesn't already exist
-    /// </summary>
-    /// <param name="totalSeconds"></param>
-    private void StartTimer(float totalSeconds)
+    private void GameStart()
     {
-        if (timer == null)
-        {
-            timer = StartCoroutine(Timer(gameTimeLength));
-        }
+        //maybe wait for a few seconds
+        // do a count down?
+        // then start the timer
+        GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
     }
-
-    /// <summary>
-    /// updates the UI timer text
-    /// </summary>
-    /// <param name="totalSeconds"></param>
-    private void UpdateTimer(float totalSeconds)
-    {
-        // this could be moved to the UI manager script
-
-        int minutes = Mathf.FloorToInt(totalSeconds / 60f);
-        int seconds = Mathf.RoundToInt(totalSeconds % 60f);
-
-        string formatedSeconds = seconds.ToString();
-
-        if (seconds == 0)
-        {
-            seconds = 0;
-            minutes += 1;
-        }
-
-        timerText.text = "Timer: " + minutes.ToString("00") + ":" + seconds.ToString("00");
-    }
-
-    public IEnumerator Timer(float timerStartValue = 180)
-    {
-        currentSeconds = timerStartValue;
-
-        while (currentSeconds > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            currentSeconds--;
-            UpdateTimer(currentSeconds);
-        }
-
-        //GameEventsManager.instance.gameEvents.TimerEnd();
-        Debug.Log("Game Over");
-        yield return null;
-    }
-    #endregion
 
     #region Game Over
     private void ContinuePrompt()
@@ -103,23 +47,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
 
         // check if player has enough money to keep playing
-        if (currentMoney >= continueCost)
+        if (rewardManager.currentMoney >= rewardManager.continueCost)
         {
             //enable continue button
 
         }
 
-        //enable the Game Over panel
+        //enable the continue prompt panel
+        uiManager.continuePanel.SetActive(true);
     }
 
     /// <summary>
     /// called to continue the game
     /// </summary>
-    public void ContinueGame()
+    private void ContinueGame()
     {
         Time.timeScale = 1;
-        currentMoney -= continueCost;
-        currentSeconds += continueTimeGain;
+        rewardManager.currentMoney -= rewardManager.continueCost;
+        rewardManager.currentSeconds += rewardManager.continueTimeGain;
+        GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
+        uiManager.continuePanel.SetActive(false);
     }
 
     private void GameOver()
@@ -127,14 +74,22 @@ public class GameManager : MonoBehaviour
         //do Game Over stuff here
 
         //set highscore
-        if (currentMoney > PlayerPrefs.GetInt("Money"))
-        {
-            PlayerPrefs.SetInt("Money", currentMoney);
-        }
+        GameEventsManager.instance.gameEvents.SetHighScore(rewardManager.currentMoney);
         
         // return to main menu
-        //GameEventsManager.instance.gameEvents.LoadScene(0);
+        GameEventsManager.instance.gameEvents.LoadScene(0);
+    }
+    #endregion
+
+    #region Continue Prompt Button Functions
+    public void Submit()
+    {
+        GameEventsManager.instance.gameEvents.GameOver();
     }
 
+    public void Continue()
+    {
+        GameEventsManager.instance.gameEvents.ContinueGame();
+    }
     #endregion
 }

@@ -1,29 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
-    public int currentMoney = 0; // how much money the player currently has
-    public float currentTime = 30f; // how much game time is left
+    [Header("Money")]
+    public int currentMoney = 0;
+
+    [Header("Timer")]
+    public float gameTimeLength = 180f; //the length of the game in seconds 
+    public float currentSeconds;
+    private Coroutine timer;
+
+    [Header("Continue")]
+    public int continueCost = 500; // how much it costs to continue playing
+    public float continueTimeGain = 60f; // how much time you get when continuing 
 
     private void OnEnable()
     {
         GameEventsManager.instance.rewardEvents.onMoneyGained += MoneyGained;
         GameEventsManager.instance.rewardEvents.onTimeGained += TimeGained;
+        GameEventsManager.instance.gameEvents.onTimerStart += StartTimer;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.rewardEvents.onMoneyGained -= MoneyGained;
         GameEventsManager.instance.rewardEvents.onTimeGained -= TimeGained;
+        GameEventsManager.instance.gameEvents.onTimerStart -= StartTimer;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         GameEventsManager.instance.rewardEvents.MoneyChange(currentMoney);
-        GameEventsManager.instance.rewardEvents.TimeChange(currentTime);
+        GameEventsManager.instance.rewardEvents.TimeChange(currentSeconds);
     }
 
     private void MoneyGained(int money)
@@ -34,7 +46,33 @@ public class RewardManager : MonoBehaviour
 
     private void TimeGained(float time)
     {
-        currentTime += time;
-        GameEventsManager.instance.rewardEvents.TimeChange(currentTime);
+        currentSeconds += time;
+        GameEventsManager.instance.rewardEvents.TimeChange(currentSeconds);
     }
+
+    #region Timer
+    /// <summary>
+    /// Starts the timer if one doesn't already exist
+    /// </summary>
+    /// <param name="totalSeconds"></param>
+    private void StartTimer(float seconds)
+    {
+            timer = StartCoroutine(Timer(seconds));
+    }
+
+    public IEnumerator Timer(float timerStartValue = 180)
+    {
+        currentSeconds = timerStartValue;
+
+        while (currentSeconds > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            currentSeconds--;
+            GameEventsManager.instance.uiEvents.UpdateTimer(currentSeconds);
+        }
+
+        GameEventsManager.instance.gameEvents.TimerEnd();
+        yield return null;
+    }
+    #endregion
 }

@@ -15,6 +15,16 @@ public class GameEvents
         }
     }
 
+    public event Action<float> onTimerStart;
+
+    public void TimerStart(float seconds)
+    {
+        if (onTimerStart != null)
+        {
+            onTimerStart(seconds);
+        }
+    }
+
     public event Action onTimerEnd;
 
     public void TimerEnd()
@@ -62,6 +72,16 @@ public class GameEvents
         if (onQuitGame != null)
         {
             onQuitGame();
+        }
+    }
+
+    public event Action<int> onSetHighScore;
+
+    public void SetHighScore(int score)
+    {
+        if (onSetHighScore != null)
+        {
+            onSetHighScore(score);
         }
     }
 }
