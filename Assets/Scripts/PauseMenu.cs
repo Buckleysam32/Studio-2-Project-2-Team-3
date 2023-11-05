@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     private void OnEnable()
     {
         //GameEventsManager.instance.inputEvents.onPausePressed += Pause;
+        // need to add onPausedPressed to input events
     }
 
     private void OnDisable()

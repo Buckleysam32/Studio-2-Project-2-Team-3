@@ -17,9 +17,9 @@ public class SceneLoader : MonoBehaviour
         //GameEventsManager.instance.gameEvents.QuitGame -= QuitGame;
     }
 
-    public void LoadScene(int sceneIndex)
+    public void LoadScene(int buildIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(buildIndex);
     }
     public void QuitGame()
     {
