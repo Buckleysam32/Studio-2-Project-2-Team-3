@@ -231,6 +231,10 @@ MonoBehaviour:
   playerTransform: {fileID: 642966187}
   offset: {x: 0, y: 0, z: -10}
   damping: 0.5
+  playerRB: {fileID: 642966185}
+  playerZoom: 0
+  zoomFactor: 0
+  OrthographicCamera: {fileID: 0}
 --- !u!1 &642966182
 GameObject:
   m_ObjectHideFlags: 0
