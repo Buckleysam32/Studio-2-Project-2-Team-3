@@ -63,8 +63,8 @@ public class GameManager : MonoBehaviour
     private void ContinueGame()
     {
         Time.timeScale = 1;
-        rewardManager.currentMoney -= rewardManager.continueCost;
-        rewardManager.currentSeconds += rewardManager.continueTimeGain;
+        GameEventsManager.instance.rewardEvents.MoneyGained(-rewardManager.continueCost);
+        GameEventsManager.instance.rewardEvents.TimeGained(rewardManager.continueTimeGain);
         GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
         uiManager.continuePanel.SetActive(false);
     }
