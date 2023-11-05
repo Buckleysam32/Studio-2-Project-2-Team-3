@@ -22,7 +22,7 @@ public class CameraSystem : MonoBehaviour
     public void Awake()
     {
         OrthographicCamera = GetComponent<Camera>();
-        playerZoom = 10f;
+        playerZoom = 5f;
     }
 
     private void Update()
