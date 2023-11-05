@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pausePannel;
+    public GameObject pausePanel;
     public bool paused = false;
 
     public SceneLoader sceneLoader; // this can get removed when game events is set up
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         paused = !paused;
 
-        pausePannel.SetActive(paused);
+        pausePanel.SetActive(paused);
 
         if (paused)
         {
