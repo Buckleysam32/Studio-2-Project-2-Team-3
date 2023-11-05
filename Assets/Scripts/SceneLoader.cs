@@ -7,12 +7,14 @@ public class SceneLoader : MonoBehaviour
 {
     private void OnEnable()
     {
-        //GameEvents.LoadScene += LoadScene;
+        //GameEventsManager.instance.gameEvents.LoadScene += LoadScene;
+        //GameEventsManager.instance.gameEvents.QuitGame += QuitGame;
     }
 
     private void OnDisable()
     {
-        //GameEvents.LoadScene -= LoadScene;
+        //GameEventsManager.instance.gameEvents.LoadScene -= LoadScene;
+        //GameEventsManager.instance.gameEvents.QuitGame -= QuitGame;
     }
 
     public void LoadScene(int sceneIndex)

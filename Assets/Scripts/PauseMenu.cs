@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pausePannel;
     public bool paused = false;
 
+    public SceneLoader sceneLoader; // this can get removed when game events is set up
+
     private void OnEnable()
     {
         //GameEventsManager.instance.inputEvents.onPausePressed += Pause;
@@ -25,6 +27,14 @@ public class PauseMenu : MonoBehaviour
         {
             Pause();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q) && paused)
+        {
+            //GameEventsManager.instance.gameEvents.QuitGame();
+            sceneLoader.QuitGame();
+            Debug.Log("Quit Game");
+        }
+        
     }
 
     public void Pause()
