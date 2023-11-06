@@ -14,4 +14,14 @@ public class UiEvents
             onTimerUpdate(seconds);
         }
     }
+
+    public Action<GameObject> onActivateIndicator;
+
+    public void ActivateIndicator(GameObject targetGameObject)
+    {
+        if (onActivateIndicator != null)
+        {
+            onActivateIndicator(targetGameObject);
+        }
+    }
 }

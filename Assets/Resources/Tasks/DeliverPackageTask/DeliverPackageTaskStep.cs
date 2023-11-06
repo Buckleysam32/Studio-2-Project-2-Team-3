@@ -11,7 +11,7 @@ public class DeliverPackageTaskStep : TaskStep
     private int packagesDelivered = 0;
 
     public StartPoint startPoint;
-
+    public EndPoint endPoint;
 
     private void OnEnable()
     {
@@ -21,6 +21,11 @@ public class DeliverPackageTaskStep : TaskStep
     private void OnDisable()
     {
         GameEventsManager.instance.taskEvents.onPackageDelivery -= DeliverPackage;
+    }
+
+    private void Start()
+    {
+        GameEventsManager.instance.uiEvents.onActivateIndicator(endPoint.gameObject);
     }
 
     /// <summary>
@@ -33,6 +38,7 @@ public class DeliverPackageTaskStep : TaskStep
         if (packagesDelivered < amountToDeliver)
         {
             packagesDelivered++;
+            GameEventsManager.instance.uiEvents.onActivateIndicator(startPoint.gameObject);
             UpdateState();
         }
 

@@ -27,10 +27,17 @@ public class TaskIcon : MonoBehaviour
                 if(startPoint) { requirementsNotMetIcon.SetActive(true); }
                 break;
             case TaskState.CanStart:
-                if (startPoint) { canStartIcon.SetActive(true); }
+                if (startPoint)
+                {
+                    canStartIcon.SetActive(true);
+                    GameEventsManager.instance.uiEvents.onActivateIndicator(this.gameObject);
+                }
                 break;
             case TaskState.InProgress:
-                if (endPoint) { inProgressIcon.SetActive(true); }
+                if (endPoint)
+                {
+                    inProgressIcon.SetActive(true);
+                }
                 break;
             case TaskState.CanFinish:
                 if (endPoint) { canFinishIcon.SetActive(true); }
