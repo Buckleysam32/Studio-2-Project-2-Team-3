@@ -12,6 +12,7 @@ public class EndPoint : MonoBehaviour
         {
             //change this to enabling the option to deliver upon submit being pressed
             GameEventsManager.instance.taskEvents.PackageDelivery();
+           
         }
     }
 }
