@@ -264,6 +264,7 @@ MonoBehaviour:
   accelerationFactor: 30
   turnFactor: 3.5
   maxSpeed: 20
+  spriteAnim: {fileID: 642966188}
 --- !u!50 &642966185
 Rigidbody2D:
   serializedVersion: 4

@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     float steeringInput = 0;
 
     float rotationAngle = 0;
+    float rotationBuffer = 0;
+    int spriteDirection = 8;
+    [SerializeField] Animator spriteAnim;
 
     float velocityVsUp = 0;
 
@@ -101,6 +104,48 @@ public class PlayerController : MonoBehaviour
         // Apply steering
         carRigidbody2D.MoveRotation(rotationAngle);
     }
+
+    /// <summary>
+    /// Handles the animator's use of the sprites
+    /// </summary>
+    void DirectionSpriteAnimation()
+    {
+        if (spriteDirection == 1)
+        {
+            rotationBuffer = 135;
+        }
+        else if (spriteDirection == 2)
+        {
+            rotationBuffer = 180;
+        }
+        else if (spriteDirection == 3)
+        {
+            rotationBuffer = -135;
+        }
+        else if (spriteDirection == 4)
+        {
+            rotationBuffer = 90;
+        }
+        else if (spriteDirection == 6)
+        {
+            rotationBuffer = -90;
+        }
+        else if (spriteDirection == 7)
+        {
+            rotationBuffer = 45;
+        }
+        else if (spriteDirection == 8)
+        {
+            rotationBuffer = 0;
+        }
+        else if (spriteDirection == 9)
+        {
+            rotationBuffer = -45;
+        }
+        rotationBuffer = (rotationAngle - rotationBuffer);
+    }
+
+
 
     /// <summary>
     /// Adds friction to the car
