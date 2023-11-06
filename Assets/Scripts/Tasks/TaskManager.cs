@@ -14,6 +14,7 @@ public class TaskManager : MonoBehaviour
     // task start requirements
     private List<Task> activeTasks = new List<Task>(); // this is list of only the ACTIVE tasks
     private List<Task> innactiveTasks = new List<Task>(); // this is a list of the innactive tasks
+    public TaskIndicator taskIndicator;
 
     private void Awake()
     {
@@ -270,6 +271,7 @@ public class TaskManager : MonoBehaviour
     private void ActivateTask(Task task)
     {
         task.taskActive = true;
+        taskIndicator.target = task;
     }
     private void SwitchTaskList(Task task)
     {

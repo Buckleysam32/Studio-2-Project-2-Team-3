@@ -39,7 +39,7 @@ public class TaskPoint : MonoBehaviour
     private void Update()
     {
         //just being used to check if its worked, this should go into an actual input system
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
         {
             GameEventsManager.instance.inputEvents.SubmitPressed();
         }

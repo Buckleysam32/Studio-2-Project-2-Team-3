@@ -7,7 +7,7 @@ public class DeliverPackageTaskStep : TaskStep
 {
     //the transform on the DeliverPackageTask Prefab will be the delivery location
 
-    private int amountToDeliver = 2;
+    private int amountToDeliver = 1;
     private int packagesDelivered = 0;
 
     public StartPoint startPoint;

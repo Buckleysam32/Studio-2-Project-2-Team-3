@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Visit Location
+  m_text: '  Drive by Drop off '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e9e6e1bc4b69cb4398aeae76a1c50de, type: 2}
   m_sharedMaterial: {fileID: 8716086432320457122, guid: 9e9e6e1bc4b69cb4398aeae76a1c50de, type: 2}
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 9f477f1edbcaa9441ae08cf2b9300724, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -347,7 +347,7 @@ Transform:
   m_GameObject: {fileID: 8655036604188339217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.19, y: -26.31, z: 0}
+  m_LocalPosition: {x: 35.48, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -389,7 +389,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
 --- !u!114 &-5012162316098088773
 MonoBehaviour:
   m_ObjectHideFlags: 0
