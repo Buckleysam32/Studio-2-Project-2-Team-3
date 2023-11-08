@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour
     // Local Variables
     float accelerationInput = 0;
     float steeringInput = 0;
-
     float rotationAngle = 0;
-    float rotationBuffer = 0;
-    int spriteDirection = 8;
+
+    //Sprite animation related variables
+    [SerializeField] float rotationAngleAnim = 0;
+    [SerializeField] float rotationBuffer = 0;
+    [SerializeField] int spriteDirection = 8;
     [SerializeField] Animator spriteAnim;
 
     float velocityVsUp = 0;
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
     {
         // Assign the car's rigidbody
         carRigidbody2D = GetComponent<Rigidbody2D>();
+        // Assign the car's animator
+        spriteAnim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -44,6 +48,8 @@ public class PlayerController : MonoBehaviour
         KillOrthogonalVelocity();
 
         ApplySteering();
+
+        DirectionSpriteAnimation();
     }
     
     /// <summary>
@@ -106,10 +112,11 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the animator's use of the sprites
+    /// Handles the animator's use of the sprites' rotation direction
     /// </summary>
     void DirectionSpriteAnimation()
     {
+        //First, set axis buffer for current direction
         if (spriteDirection == 1)
         {
             rotationBuffer = 135;
@@ -120,7 +127,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (spriteDirection == 3)
         {
-            rotationBuffer = -135;
+            rotationBuffer = 225;
         }
         else if (spriteDirection == 4)
         {
@@ -128,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (spriteDirection == 6)
         {
-            rotationBuffer = -90;
+            rotationBuffer = 270;
         }
         else if (spriteDirection == 7)
         {
@@ -140,9 +147,81 @@ public class PlayerController : MonoBehaviour
         }
         else if (spriteDirection == 9)
         {
-            rotationBuffer = -45;
+            rotationBuffer = 315;
         }
-        rotationBuffer = (rotationAngle - rotationBuffer);
+        rotationAngleAnim = (this.transform.localEulerAngles.z - rotationBuffer); //Check angle
+        if(rotationAngleAnim > 22.5f && rotationAngleAnim < 95) //Turn left
+        {
+            if (spriteDirection == 1)
+            {
+                spriteDirection = 2;
+            }
+            else if (spriteDirection == 2)
+            {
+                spriteDirection = 3;
+            }
+            else if (spriteDirection == 3)
+            {
+                spriteDirection = 6;
+            }
+            else if (spriteDirection == 6)
+            {
+                spriteDirection = 9;
+            }
+            else if (spriteDirection == 9)
+            {
+                spriteDirection = 8;
+            }
+            else if (spriteDirection == 8)
+            {
+                spriteDirection = 7;
+            }
+            else if(spriteDirection == 7)
+            {
+                spriteDirection = 4;
+            }
+            else if(spriteDirection == 4)
+            {
+                spriteDirection = 1;
+            }
+        }
+        else if(rotationAngleAnim < 337.5f && rotationAngleAnim > 235 || rotationAngleAnim < -22.5f && rotationAngleAnim > -95) //Turn right
+        {
+            if (spriteDirection == 1)
+            {
+                spriteDirection = 4;
+            }
+            else if (spriteDirection == 4)
+            {
+                spriteDirection = 7;
+            }
+            else if (spriteDirection == 7)
+            {
+                spriteDirection = 8;
+            }
+            else if (spriteDirection == 8)
+            {
+                spriteDirection = 9;
+            }
+            else if (spriteDirection == 9)
+            {
+                spriteDirection = 6;
+            }
+            else if (spriteDirection == 6)
+            {
+                spriteDirection = 3;
+            }
+            else if (spriteDirection == 3)
+            {
+                spriteDirection = 2;
+            }
+            else if (spriteDirection == 2)
+            {
+                spriteDirection = 1;
+            }
+        }
+        spriteAnim.SetInteger("RotationDirection", spriteDirection);
+
     }
 
 
