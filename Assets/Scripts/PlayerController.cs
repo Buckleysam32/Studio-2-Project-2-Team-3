@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     float rotationAngle = 0;
 
     //Sprite animation related variables
-    [SerializeField] float rotationAngleAnim = 0;
-    [SerializeField] float rotationBuffer = 0;
-    [SerializeField] int spriteDirection = 8;
+    float rotationAngleAnim = 0;
+    float rotationBuffer = 0;
+    public int spriteDirection = 8;
     [SerializeField] Animator spriteAnim;
 
     float velocityVsUp = 0;
@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
     {
         // Assign the car's rigidbody
         carRigidbody2D = GetComponent<Rigidbody2D>();
-        // Assign the car's animator
-        spriteAnim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
