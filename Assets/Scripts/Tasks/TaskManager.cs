@@ -55,7 +55,7 @@ public class TaskManager : MonoBehaviour
             if (task.state == TaskState.InProgress)
             {
                 SwitchTaskList(task);
-                task.InstantiateCurrentQuestStep(this.transform);
+                task.InstantiateCurrentTaskStep(this.transform);
             }
 
             //broadcast the initial state of all quests on startup
@@ -152,7 +152,7 @@ public class TaskManager : MonoBehaviour
     private void StartTask(string id)
     {
         Task task = GetTaskById(id);
-        task.InstantiateCurrentQuestStep(this.transform);
+        task.InstantiateCurrentTaskStep(this.transform);
         ChangeTaskState(task.info.id, TaskState.InProgress);
 
         Debug.Log("Start Task: " + id);
@@ -168,7 +168,7 @@ public class TaskManager : MonoBehaviour
         // if there are more steps, instantiate the next one
         if (task.CurrentStepExist())
         {
-            task.InstantiateCurrentQuestStep(this.transform);
+            task.InstantiateCurrentTaskStep(this.transform);
         }
         // if there are no more steps, then we've finished all of them for the task
         else

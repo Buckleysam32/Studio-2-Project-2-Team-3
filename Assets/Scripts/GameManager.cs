@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     private void Start()
-    {
-        Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen      
+    {     
         GameEventsManager.instance.gameEvents.GameStart();
     }
 
     private void GameStart()
     {
+        Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen      
         startRoutine = StartCoroutine(StartRoutine());
         
     }
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     private void ContinueGame()
     {
         Time.timeScale = 1;
+        // need to check if the player has enough money before deducting
         GameEventsManager.instance.rewardEvents.MoneyGained(-rewardManager.continueCost);
         GameEventsManager.instance.rewardEvents.TimeGained(rewardManager.continueTimeGain);
         GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Continue Prompt Button Functions
+    //these should go in the UI manager 
     public void Submit()
     {
         GameEventsManager.instance.gameEvents.GameOver();

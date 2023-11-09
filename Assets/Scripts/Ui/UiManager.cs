@@ -43,14 +43,6 @@ public class UiManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(totalSeconds / 60f);
         int seconds = Mathf.RoundToInt(totalSeconds % 60f);
 
-        string formatedSeconds = seconds.ToString();
-
-        if (seconds == 0 && minutes != 0)
-        {
-            seconds = 0;
-            minutes += 1;
-        }
-
         timerText.text = "Timer: " + minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
