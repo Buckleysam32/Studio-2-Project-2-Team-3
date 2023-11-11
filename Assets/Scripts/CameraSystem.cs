@@ -27,9 +27,18 @@ public class CameraSystem : MonoBehaviour
 
     private void Update()
     {
-        Vector3 movePosition = playerTransform.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
-        playerZoom = playerRB.velocity.magnitude / 10 + 3f;
-        OrthographicCamera.orthographicSize = playerZoom;
+        if(this.tag == "MainCamera")
+        {
+            Vector3 movePosition = playerTransform.position + offset;
+            transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
+            playerZoom = playerRB.velocity.magnitude / 10 + 3f;
+            OrthographicCamera.orthographicSize = playerZoom;
+        }
+        else
+        {
+            Vector3 movePosition = playerTransform.position + offset;
+            transform.position = Vector3.SmoothDamp(transform.position, movePosition, ref velocity, damping);
+        }
+
     }
 }
