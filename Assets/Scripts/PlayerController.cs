@@ -13,8 +13,13 @@ public class PlayerController : MonoBehaviour
     // Local Variables
     float accelerationInput = 0;
     float steeringInput = 0;
-
     float rotationAngle = 0;
+
+    //Sprite animation related variables
+    float rotationAngleAnim = 0;
+    float rotationBuffer = 0;
+    public int spriteDirection = 8;
+    [SerializeField] Animator spriteAnim;
 
     float velocityVsUp = 0;
 
@@ -41,6 +46,8 @@ public class PlayerController : MonoBehaviour
         KillOrthogonalVelocity();
 
         ApplySteering();
+
+        DirectionSpriteAnimation();
     }
     
     /// <summary>
@@ -101,6 +108,121 @@ public class PlayerController : MonoBehaviour
         // Apply steering
         carRigidbody2D.MoveRotation(rotationAngle);
     }
+
+    /// <summary>
+    /// Handles the animator's use of the sprites' rotation direction
+    /// </summary>
+    void DirectionSpriteAnimation()
+    {
+        //First, set axis buffer for current direction
+        if (spriteDirection == 1)
+        {
+            rotationBuffer = 135;
+        }
+        else if (spriteDirection == 2)
+        {
+            rotationBuffer = 180;
+        }
+        else if (spriteDirection == 3)
+        {
+            rotationBuffer = 225;
+        }
+        else if (spriteDirection == 4)
+        {
+            rotationBuffer = 90;
+        }
+        else if (spriteDirection == 6)
+        {
+            rotationBuffer = 270;
+        }
+        else if (spriteDirection == 7)
+        {
+            rotationBuffer = 45;
+        }
+        else if (spriteDirection == 8)
+        {
+            rotationBuffer = 0;
+        }
+        else if (spriteDirection == 9)
+        {
+            rotationBuffer = 315;
+        }
+        rotationAngleAnim = (this.transform.localEulerAngles.z - rotationBuffer); //Check angle
+        if(rotationAngleAnim > 22.5f && rotationAngleAnim < 95) //Turn left
+        {
+            if (spriteDirection == 1)
+            {
+                spriteDirection = 2;
+            }
+            else if (spriteDirection == 2)
+            {
+                spriteDirection = 3;
+            }
+            else if (spriteDirection == 3)
+            {
+                spriteDirection = 6;
+            }
+            else if (spriteDirection == 6)
+            {
+                spriteDirection = 9;
+            }
+            else if (spriteDirection == 9)
+            {
+                spriteDirection = 8;
+            }
+            else if (spriteDirection == 8)
+            {
+                spriteDirection = 7;
+            }
+            else if(spriteDirection == 7)
+            {
+                spriteDirection = 4;
+            }
+            else if(spriteDirection == 4)
+            {
+                spriteDirection = 1;
+            }
+        }
+        else if(rotationAngleAnim < 337.5f && rotationAngleAnim > 235 || rotationAngleAnim < -22.5f && rotationAngleAnim > -95) //Turn right
+        {
+            if (spriteDirection == 1)
+            {
+                spriteDirection = 4;
+            }
+            else if (spriteDirection == 4)
+            {
+                spriteDirection = 7;
+            }
+            else if (spriteDirection == 7)
+            {
+                spriteDirection = 8;
+            }
+            else if (spriteDirection == 8)
+            {
+                spriteDirection = 9;
+            }
+            else if (spriteDirection == 9)
+            {
+                spriteDirection = 6;
+            }
+            else if (spriteDirection == 6)
+            {
+                spriteDirection = 3;
+            }
+            else if (spriteDirection == 3)
+            {
+                spriteDirection = 2;
+            }
+            else if (spriteDirection == 2)
+            {
+                spriteDirection = 1;
+            }
+        }
+        spriteAnim.SetInteger("RotationDirection", spriteDirection);
+
+    }
+
+
 
     /// <summary>
     /// Adds friction to the car
