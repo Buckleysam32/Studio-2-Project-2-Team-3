@@ -9,6 +9,10 @@ public class UiManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject instructionPanel;
     public GameObject gameInformation;
+    public GameObject miniMap;
+    public GameObject fullMap;
+
+    public bool mapActivated = false;
 
     public TMP_Text timerText;
     public TMP_Text moneyText;
@@ -32,6 +36,36 @@ public class UiManager : MonoBehaviour
         pausePanel.SetActive(false);
         instructionPanel.SetActive(false);
         gameInformation.SetActive(false);
+    }
+
+    private void Update()
+    {
+        ControlMap();
+
+    }
+
+    public void ControlMap()
+    {
+        if (Input.GetKeyDown(KeyCode.M) && mapActivated == false)
+        {
+            Debug.Log("Open Map");
+            miniMap.SetActive(false);
+
+            fullMap.SetActive(true);
+
+            mapActivated = true;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.M) && mapActivated == true)
+        {
+            Debug.Log("Close Map");
+            miniMap.SetActive(true);
+
+            fullMap.SetActive(false);
+
+            mapActivated = false;
+
+        }
     }
 
     /// <summary>
