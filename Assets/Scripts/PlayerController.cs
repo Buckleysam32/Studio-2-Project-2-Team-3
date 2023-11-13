@@ -113,6 +113,35 @@ public class PlayerController : MonoBehaviour
         carRigidbody2D.velocity = fowardVelocity + rightVelocity * driftFactor;
     }
 
+    float GetLateralVeolcity()
+    {
+        return Vector2.Dot(transform.right, carRigidbody2D.velocity);
+    }
+
+    public bool IsLeavingMark(out float lateralVeolcity, out bool isBraking)
+    {
+        lateralVeolcity = GetLateralVeolcity();
+        isBraking = false;
+
+        if (accelerationInput < 0 && velocityVsUp > 0)
+        {
+            isBraking = true;
+            return true;
+        }
+
+        else if (Mathf.Abs(GetLateralVeolcity()) > 0.5f)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+
+        
+    }
+
     /// <summary>
     /// Applies the player input
     /// </summary>
