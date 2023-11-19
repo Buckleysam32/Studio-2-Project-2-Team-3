@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3f8d8cf3a5c8544a7bdf09f89d9fae, type: 3}
-  m_Name: VisitLocationTask
+  m_Name: VisitLocationTask4
   m_EditorClassIdentifier: 
-  <id>k__BackingField: VisitLocationTask
+  <id>k__BackingField: VisitLocationTask4
   displayName: Visit a Location!
   maximumTasks: 3
   taskPrerequisites: []
   taskStepPrefabs:
-  - {fileID: 8655036604188339217, guid: 46e492732068e214f92c63df1b61ef2e, type: 3}
-  - {fileID: 8655036604188339217, guid: f4a463e703cab3a4db8c2fa633d57e37, type: 3}
-  moneyReward: 100
-  timeReward: 35
+  - {fileID: 8655036604188339217, guid: bbdb564120b8cfd44b5e960f2cc36373, type: 3}
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

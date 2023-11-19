@@ -24,4 +24,24 @@ public class UiEvents
             onActivateIndicator(targetGameObject);
         }
     }
+
+    public Action<int> onPickUpPackage;
+
+    public void PickUpPackage(int packageMaxHealth)
+    {
+        if (onPickUpPackage != null)
+        {
+            onPickUpPackage(packageMaxHealth);
+        }
+    }
+
+    public Action<int> onPackageDamaged;
+
+    public void PackageDamaged(int packageCurrentHealth)
+    {
+        if (onPickUpPackage != null)
+        {
+            onPackageDamaged(packageCurrentHealth);
+        }
+    }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3f8d8cf3a5c8544a7bdf09f89d9fae, type: 3}
+  m_Name: DeliverPackageTask
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: DeliverPackageTask
+  displayName: Deliver a package
+  maximumTasks: 3
+  taskPrerequisites: []
+  taskStepPrefabs:
+  - {fileID: 14595369499395361, guid: 5409826938d2b27418cfc57d3567f3c0, type: 3}
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

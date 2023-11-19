@@ -13,6 +13,7 @@ public class Task
     public int currentTaskStepIndex;
     private TaskStepState[] taskStepStates;
 
+    //constructor for making a new task 
     public Task(TaskInfoSO taskInfo)
     {
         this.info = taskInfo;
@@ -25,6 +26,7 @@ public class Task
         }
     }
 
+    // constructor for making a task from save data
     public Task(TaskInfoSO taskInfo,bool taskActive, TaskState taskState, int currentTaskStepIndex, TaskStepState[] taskStepStates)
     {
         this.info = taskInfo;
@@ -44,28 +46,43 @@ public class Task
         }
     }
 
+    /// <summary>
+    /// iterates the current task step index
+    /// </summary>
     public void MoveToNextStep()
     {
         currentTaskStepIndex++;
     }
 
+    /// <summary>
+    /// Checks if the current task step index can fit in the task step prefab array
+    /// </summary>
+    /// <returns></returns>
     public bool CurrentStepExist()
     {
         return (currentTaskStepIndex < info.taskStepPrefabs.Length);
     }
 
-    public void InstantiateCurrentQuestStep(Transform parentTransform)
+    /// <summary>
+    /// Instantiates the current task step as a child of the input transform
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    public void InstantiateCurrentTaskStep(Transform parentTransform)
     {
         GameObject taskStepPrefab = GetCurrentTaskStepPrefab();
         if (taskStepPrefab != null)
         {
             // could do object pooling here if performance is an issue
            TaskStep taskStep = UnityEngine.Object.Instantiate<GameObject>(taskStepPrefab, parentTransform).GetComponent<TaskStep>();
-            
+            // initialise the step state, incase we're loading data
             taskStep.InitialiseTaskStep(info.id, currentTaskStepIndex, taskStepStates[currentTaskStepIndex].state);
         }
     }
 
+    /// <summary>
+    /// Returns the prefab of the current task step, if it exists
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetCurrentTaskStepPrefab()
     {
         GameObject taskStepPrefab = null;
@@ -82,6 +99,11 @@ public class Task
         return taskStepPrefab;
     }
 
+    /// <summary>
+    /// sets the task step state of the input stepIndex to the input TaskStepState
+    /// </summary>
+    /// <param name="taskStepState"></param>
+    /// <param name="stepIndex"></param>
     public void StoreTaskStepState(TaskStepState taskStepState, int stepIndex)
     {
         if (stepIndex < taskStepStates.Length)
