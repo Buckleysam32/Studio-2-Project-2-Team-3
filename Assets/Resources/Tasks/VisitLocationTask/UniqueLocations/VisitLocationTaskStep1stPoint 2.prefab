@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: -3491974215828506787}
   - component: {fileID: -5012162316098088773}
   m_Layer: 0
-  m_Name: VisitFirstLocationTaskStep
+  m_Name: VisitLocationTaskStep1stPoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

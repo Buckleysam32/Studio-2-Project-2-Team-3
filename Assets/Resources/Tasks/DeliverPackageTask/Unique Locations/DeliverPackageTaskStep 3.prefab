@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6738172501125321102}
   - component: {fileID: -2897342631559273813}
   m_Layer: 0
-  m_Name: DeliverPackageTaskStep
+  m_Name: DeliverPackageTaskStep 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,10 +9,9 @@ public class TaskPoint : MonoBehaviour
     [Header("Task")]
     [SerializeField] private TaskInfoSO taskInfoSOForPoint;
 
-    private bool playerIsNear = false;
     private string taskId;
     private TaskState currentTaskState;
-    private TaskIcon taskIcon;
+    //private TaskIcon taskIcon;
 
 
     [Header("Config")]
@@ -22,7 +21,7 @@ public class TaskPoint : MonoBehaviour
     private void Awake()
     {
         taskId = taskInfoSOForPoint.id;
-        taskIcon = GetComponentInChildren<TaskIcon>();
+        //taskIcon = GetComponentInChildren<TaskIcon>();
     }
 
     private void OnEnable()
@@ -40,19 +39,15 @@ public class TaskPoint : MonoBehaviour
     private void Update()
     {
         //just being used to check if its worked, this should go into an actual input system
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
-        {
-            GameEventsManager.instance.inputEvents.SubmitPressed();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    GameEventsManager.instance.inputEvents.SubmitPressed();
+        //}
     }
+
 
     private void SubmitPressed()
     {
-        if (!playerIsNear)
-        {
-            return;
-        }
-
         // start or finish a task
         if (currentTaskState.Equals(TaskState.CanStart) && startPoint)
         {
@@ -71,26 +66,17 @@ public class TaskPoint : MonoBehaviour
         if (task.info.id.Equals(taskId))
         {
             currentTaskState = task.state;
-            taskIcon.SetState(currentTaskState, startPoint, endPoint);
+            //taskIcon.SetState(currentTaskState, startPoint, endPoint);
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            playerIsNear = true;
-            taskIcon.SetState(currentTaskState, startPoint, endPoint);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerIsNear = false;
-            taskIcon.SetState(currentTaskState, startPoint, endPoint);
+            GameEventsManager.instance.inputEvents.SubmitPressed();
+            GameObject childGO = transform.GetChild(0).gameObject;
+            childGO.SetActive(false);
         }
     }
 }
