@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     // Components
     Rigidbody2D carRigidbody2D;
 
+    // Special condition
+    public bool slippery;
     private void Awake()
     {
         // Assign the car's rigidbody
@@ -101,6 +103,24 @@ public class PlayerController : MonoBehaviour
         // Only let car turn when moving
         float minSpeedBeforeTurn = (carRigidbody2D.velocity.magnitude / 8);
         minSpeedBeforeTurn = Mathf.Clamp01(minSpeedBeforeTurn);
+
+        // Slippery System
+        if (slippery)
+        {
+            int rndm = Random.Range(0, 2);
+            if (rndm == 1)
+            {
+                rndm = Random.Range(0, 2);
+                if (rndm == 1)
+                {
+                    steeringInput = 2f;
+                }
+                else
+                {
+                    steeringInput = -2f;
+                }
+            }
+        }
 
         // Update car's rotation angle
         rotationAngle -= steeringInput * turnFactor * minSpeedBeforeTurn;
@@ -251,7 +271,7 @@ public class PlayerController : MonoBehaviour
             return true;
         }
 
-        else if (Mathf.Abs(GetLateralVeolcity()) > 0.5f)
+        else if (Mathf.Abs(GetLateralVeolcity()) > 0.93f || slippery && Mathf.Abs(GetLateralVeolcity()) > 0.45f)
         {
             return true;
         }

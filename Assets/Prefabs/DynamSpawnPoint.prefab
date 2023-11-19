@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectList:
   - {fileID: 392854626850168598, guid: 40aeffb878a4ed3429d7184e1717743a, type: 3}
+  - {fileID: 392854626850168598, guid: c29286a6c2e3eeb468118105f7e0af04, type: 3}
   spawnRarity: 4
   eligable: 0
   occupied: 0
