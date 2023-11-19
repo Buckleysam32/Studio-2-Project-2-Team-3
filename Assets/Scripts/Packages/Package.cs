@@ -39,6 +39,10 @@ public class Package : MonoBehaviour
 
     private void InitPackageValues()
     {
+        moneyModifier = 1f;
+        timeModifier = 1f; 
+
+
         switch (packageType)
         {
             case PackageType.normal:
