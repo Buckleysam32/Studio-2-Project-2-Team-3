@@ -23,13 +23,8 @@ public class TaskInfoSO : ScriptableObject
     public GameObject[] taskStepPrefabs; // the steps needed to complete the task
 
     [Header("Rewards")]
-    // these will likely come from the package type later
-
-    public int moneyReward; // how much money the player will receive upon completion
-
-    public float timeReward; // how much time the player will receive upon completion
-
-
+    public bool radomisePackageType; // should the package type be random for this task
+    public Package package; // has a package that determines rewards
 
     // make the id is always the name of the Scriptable object asset
     private void OnValidate()
