@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -13,16 +14,25 @@ public class UiManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text moneyText;
 
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthFill;
+    [SerializeField] private Gradient gradient;
+
     private void OnEnable()
     {
         GameEventsManager.instance.uiEvents.onTimerUpdate += UpdateTimer;
         GameEventsManager.instance.rewardEvents.onMoneyChange += UpdateMoney;
+        GameEventsManager.instance.uiEvents.onPickUpPackage += SetInitialHealth;
+        GameEventsManager.instance.uiEvents.onPackageDamaged += UpdateHealth;
+
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.uiEvents.onTimerUpdate -= UpdateTimer;
         GameEventsManager.instance.rewardEvents.onMoneyChange -= UpdateMoney;
+        GameEventsManager.instance.uiEvents.onPickUpPackage -= SetInitialHealth;
+        GameEventsManager.instance.uiEvents.onPackageDamaged -= UpdateHealth;
     }
 
     // Start is called before the first frame update
@@ -57,5 +67,18 @@ public class UiManager : MonoBehaviour
     private void UpdateMoney(int money)
     {
         moneyText.text = "Money: $" + money;
+    }
+
+    public void SetInitialHealth(int maxHealth)
+    {
+        healthBar.maxValue = maxHealth;
+        healthBar.value = maxHealth;
+        healthFill.color = gradient.Evaluate(1f);
+    }
+
+    public void UpdateHealth(int currentHealth)
+    {
+        healthBar.value = currentHealth;
+        healthFill.color = gradient.Evaluate(healthBar.normalizedValue);
     }
 }
