@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - Dynamic
-=======
-  - MapCamera
->>>>>>> b900ef5368751ee26ed477ca6c10aee51ba10987
+  tags: []
   layers:
   - Default
   - TransparentFX
