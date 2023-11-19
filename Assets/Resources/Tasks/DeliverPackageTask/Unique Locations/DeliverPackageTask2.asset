@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3f8d8cf3a5c8544a7bdf09f89d9fae, type: 3}
-  m_Name: DeliverPackageTask
+  m_Name: DeliverPackageTask2
   m_EditorClassIdentifier: 
-  <id>k__BackingField: DeliverPackageTask
+  <id>k__BackingField: DeliverPackageTask2
   displayName: Deliver a package
-  maximumTasks: 3
+  maximumTasks: 0
   taskPrerequisites: []
   taskStepPrefabs:
-  - {fileID: 14595369499395361, guid: 5409826938d2b27418cfc57d3567f3c0, type: 3}
-  moneyReward: 100
-  timeReward: 30
+  - {fileID: 14595369499395361, guid: f24f911a6b4b10d4182161be72ec5b2e, type: 3}
+  moneyReward: 0
+  timeReward: 0
