@@ -173,10 +173,12 @@ public class TaskManager : MonoBehaviour
         // if there are no more steps, then we've finished all of them for the task
         else
         {
-            ChangeTaskState(task.info.id, TaskState.CanFinish);
-        }
+            // this sets it so you have to hand in the task to complete
+            //ChangeTaskState(task.info.id, TaskState.CanFinish);
 
-        Debug.Log("Advance Task: " + id);
+            // we dont want that now, so just call complete task
+            CompleteTask(id);
+        }
     }
 
     private void CompleteTask(string id)
