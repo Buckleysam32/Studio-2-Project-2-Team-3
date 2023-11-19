@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: DeliverPackageTask2
   displayName: Deliver a package
-  maximumTasks: 0
+  maximumTasks: 3
   taskPrerequisites: []
   taskStepPrefabs:
   - {fileID: 14595369499395361, guid: f24f911a6b4b10d4182161be72ec5b2e, type: 3}
-  moneyReward: 0
-  timeReward: 0
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

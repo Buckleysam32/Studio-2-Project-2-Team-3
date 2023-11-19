@@ -14,6 +14,7 @@ public class TaskManager : MonoBehaviour
     // task start requirements
     public List<Task> activeTasks = new List<Task>(); // this is list of only the ACTIVE tasks
     private List<Task> innactiveTasks = new List<Task>(); // this is a list of the innactive tasks
+    private Package activePackage;
 
     private void Awake()
     {
@@ -57,7 +58,6 @@ public class TaskManager : MonoBehaviour
                 SwitchTaskList(task);
                 task.InstantiateCurrentTaskStep(this.transform);
             }
-
             //broadcast the initial state of all quests on startup
             GameEventsManager.instance.taskEvents.TaskStateChange(task);
         }
@@ -153,6 +153,7 @@ public class TaskManager : MonoBehaviour
     {
         Task task = GetTaskById(id);
         task.InstantiateCurrentTaskStep(this.transform);
+        activePackage = Instantiate(task.info.package);
         ChangeTaskState(task.info.id, TaskState.InProgress);
 
         Debug.Log("Start Task: " + id);
@@ -173,12 +174,10 @@ public class TaskManager : MonoBehaviour
         // if there are no more steps, then we've finished all of them for the task
         else
         {
-            // this sets it so you have to hand in the task to complete
-            //ChangeTaskState(task.info.id, TaskState.CanFinish);
-
-            // we dont want that now, so just call complete task
-            CompleteTask(id);
+            ChangeTaskState(task.info.id, TaskState.CanFinish);
         }
+
+        Debug.Log("Advance Task: " + id);
     }
 
     private void CompleteTask(string id)
@@ -189,6 +188,8 @@ public class TaskManager : MonoBehaviour
         SwitchTaskList(task);
         ClaimRewards(task);
         ChangeTaskState(task.info.id, TaskState.Finished);
+
+        Destroy(activePackage.gameObject);
 
         MaintainActiveTasks(); 
     }
@@ -202,8 +203,8 @@ public class TaskManager : MonoBehaviour
 
     private void ClaimRewards(Task task)
     {
-        GameEventsManager.instance.rewardEvents.MoneyGained(task.info.moneyReward);
-        GameEventsManager.instance.rewardEvents.TimeGained(task.info.timeReward);
+        GameEventsManager.instance.rewardEvents.MoneyGained(activePackage.moneyReward);
+        GameEventsManager.instance.rewardEvents.TimeGained(activePackage.timeReward);
     }
 
     private void FailTask(string id)
@@ -271,8 +272,7 @@ public class TaskManager : MonoBehaviour
 
     private void ActivateTask(Task task)
     {
-        task.taskActive = true;
-       
+        task.taskActive = true;      
     }
     private void SwitchTaskList(Task task)
     {

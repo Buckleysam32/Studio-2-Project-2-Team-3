@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3f8d8cf3a5c8544a7bdf09f89d9fae, type: 3}
   m_Name: VisitLocationTask4
   m_EditorClassIdentifier: 
-  <id>k__BackingField: 
-  displayName: 
-  maximumTasks: 0
+  <id>k__BackingField: VisitLocationTask4
+  displayName: Visit a Location!
+  maximumTasks: 3
   taskPrerequisites: []
-  taskStepPrefabs: []
-  moneyReward: 0
-  timeReward: 0
+  taskStepPrefabs:
+  - {fileID: 8655036604188339217, guid: bbdb564120b8cfd44b5e960f2cc36373, type: 3}
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

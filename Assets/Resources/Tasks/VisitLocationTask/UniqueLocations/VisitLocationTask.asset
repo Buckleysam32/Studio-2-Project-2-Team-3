@@ -18,5 +18,5 @@ MonoBehaviour:
   taskPrerequisites: []
   taskStepPrefabs:
   - {fileID: 8655036604188339217, guid: 46e492732068e214f92c63df1b61ef2e, type: 3}
-  moneyReward: 0
-  timeReward: 0
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

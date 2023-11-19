@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DeliverPackageTask4
   m_EditorClassIdentifier: 
   <id>k__BackingField: DeliverPackageTask4
-  displayName: 
-  maximumTasks: 0
+  displayName: Deliver a package
+  maximumTasks: 3
   taskPrerequisites: []
   taskStepPrefabs:
   - {fileID: 14595369499395361, guid: 83d263be30cd69743980b6eebc0d2214, type: 3}
-  moneyReward: 0
-  timeReward: 0
+  radomisePackageType: 1
+  package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}
