@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
     public bool paused = false;
+    [SerializeField] RewardManager rewardsManagerScript;
+    [SerializeField] GameManager gameManagerScript;
 
     private void OnEnable()
     {
@@ -21,7 +23,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         // need to change this to use the new input system
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && gameManagerScript.isGameOverScreen == false)
         {
             GameEventsManager.instance.inputEvents.PausePressed();
         }
@@ -33,7 +35,8 @@ public class PauseMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P) && paused)
         {
-            GameEventsManager.instance.gameEvents.LoadScene(0);
+            GameEventsManager.instance.inputEvents.PausePressed();
+            rewardsManagerScript.currentSeconds = 1;
         }
         
     }
