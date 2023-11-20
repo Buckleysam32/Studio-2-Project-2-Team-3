@@ -30,6 +30,11 @@ public class PauseMenu : MonoBehaviour
         {
             GameEventsManager.instance.gameEvents.QuitGame();
         }
+
+        if (Input.GetKeyDown(KeyCode.P) && paused)
+        {
+            GameEventsManager.instance.gameEvents.LoadScene(0);
+        }
         
     }
 
