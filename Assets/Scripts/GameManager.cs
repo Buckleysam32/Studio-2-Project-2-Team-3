@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         playerController.maxSpeed = tempMaxSpeed;
         //start timer
         GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
+        uiManager.miniMap.SetActive(true);
 
         yield return null;
     }

@@ -73,7 +73,7 @@ public class Task
         if (taskStepPrefab != null)
         {
             // could do object pooling here if performance is an issue
-           TaskStep taskStep = UnityEngine.Object.Instantiate<GameObject>(taskStepPrefab, parentTransform).GetComponent<TaskStep>();
+           TaskStep taskStep = UnityEngine.Object.Instantiate<GameObject>(taskStepPrefab, parentTransform).GetComponentInChildren<TaskStep>();
             // initialise the step state, incase we're loading data
             taskStep.InitialiseTaskStep(info.id, currentTaskStepIndex, taskStepStates[currentTaskStepIndex].state);
         }

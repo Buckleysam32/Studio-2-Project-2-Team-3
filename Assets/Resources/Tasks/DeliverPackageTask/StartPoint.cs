@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class StartPoint : MonoBehaviour
 {
-    public bool hasPackage = false;
+    public bool hasPackage = true;
 
     // this is the collider for the start point
     private void OnTriggerEnter2D(Collider2D collision)

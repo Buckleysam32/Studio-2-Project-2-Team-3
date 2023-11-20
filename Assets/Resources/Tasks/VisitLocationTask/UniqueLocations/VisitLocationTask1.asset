@@ -17,6 +17,6 @@ MonoBehaviour:
   maximumTasks: 3
   taskPrerequisites: []
   taskStepPrefabs:
-  - {fileID: 8655036604188339217, guid: 604a4a475f0da8c46b747dd5537cb7d2, type: 3}
+  - {fileID: 8655036604188339217, guid: 3e552b15f32c53440a1b9030c1500c9b, type: 3}
   radomisePackageType: 1
   package: {fileID: 3448082548580834115, guid: 001f3a84b5698104491c53fc8a73f17f, type: 3}

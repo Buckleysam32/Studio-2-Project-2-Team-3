@@ -56,7 +56,6 @@ public class TaskPoint : MonoBehaviour
         else if (currentTaskState.Equals(TaskState.CanFinish) && endPoint)
         {
             GameEventsManager.instance.taskEvents.CompleteTask(taskId);
-
         }
     }
 
@@ -67,14 +66,19 @@ public class TaskPoint : MonoBehaviour
         {
             currentTaskState = task.state;
             //taskIcon.SetState(currentTaskState, startPoint, endPoint);
+            if (currentTaskState.Equals(TaskState.CanStart))
+            {
+               transform.GetChild(0).gameObject.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && currentTaskState.Equals(TaskState.CanStart))
         {
             GameEventsManager.instance.inputEvents.SubmitPressed();
+            // turn off the visuals
             GameObject childGO = transform.GetChild(0).gameObject;
             childGO.SetActive(false);
         }

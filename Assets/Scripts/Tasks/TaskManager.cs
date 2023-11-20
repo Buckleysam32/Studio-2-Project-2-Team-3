@@ -67,17 +67,15 @@ public class TaskManager : MonoBehaviour
 
     private void Update()
     {
-
-
-        // loop through ALL tasks
-        foreach (Task task in taskMap.Values)
-        {
-            // if we're meeting the requirements, switch over to the can start state
-            if (task.state == TaskState.RequirementsNotMet && CheckRequirementsMet(task))
+            // loop through ALL tasks
+            foreach (Task task in taskMap.Values)
             {
-                ChangeTaskState(task.info.id, TaskState.CanStart);
+                // if we're meeting the requirements, switch over to the can start state
+                if (task.state == TaskState.RequirementsNotMet && CheckRequirementsMet(task))
+                {
+                    ChangeTaskState(task.info.id, TaskState.CanStart);
+                }
             }
-        }
     }
 
     private Dictionary<string, Task> CreateTaskMap()
@@ -140,6 +138,7 @@ public class TaskManager : MonoBehaviour
         //check for task prerequisites for completion
         foreach (TaskInfoSO prerequisiteTaskInfo in task.info.taskPrerequisites)
         {
+            //if the prerequistite arent finished.
             if (GetTaskById(prerequisiteTaskInfo.id).state != TaskState.Finished)
             {
                 meetsRequirements = false;
@@ -175,6 +174,7 @@ public class TaskManager : MonoBehaviour
         else
         {
             ChangeTaskState(task.info.id, TaskState.CanFinish);
+            GameEventsManager.instance.taskEvents.CompleteTask(id);
         }
 
         Debug.Log("Advance Task: " + id);
@@ -301,7 +301,7 @@ public class TaskManager : MonoBehaviour
             // and check to not enable the most recent completed task
             Task task = innactiveTasks[Random.Range(0, innactiveTasks.Count)];
             ActivateTask(task);
-            ChangeTaskState(task.info.id, TaskState.RequirementsNotMet);
+            ChangeTaskState(task.info.id, TaskState.CanStart);
             SwitchTaskList(task);
         }
     }

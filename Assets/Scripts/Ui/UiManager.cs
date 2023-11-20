@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject instructionPanel;
     public GameObject gameInformation;
+    public GameObject stepInstruction;
     public GameObject miniMap;
     public GameObject fullMap;
 
@@ -18,6 +19,7 @@ public class UiManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text moneyText;
 
+    public GameObject healthBarGO;
     public GameObject basicPackage;
     public GameObject fragilePackage;
     public GameObject overSizePackage;
@@ -33,6 +35,7 @@ public class UiManager : MonoBehaviour
         GameEventsManager.instance.uiEvents.onPickUpPackage += SetInitialHealth;
         GameEventsManager.instance.uiEvents.onPickUpPackage += SetPackageTypeIcon;
         GameEventsManager.instance.uiEvents.onPackageDamaged += UpdateHealth;
+        GameEventsManager.instance.uiEvents.onSetStepInstructionText += SetStepText;
 
     }
 
@@ -43,6 +46,7 @@ public class UiManager : MonoBehaviour
         GameEventsManager.instance.uiEvents.onPickUpPackage -= SetInitialHealth;
         GameEventsManager.instance.uiEvents.onPickUpPackage -= SetPackageTypeIcon;
         GameEventsManager.instance.uiEvents.onPackageDamaged -= UpdateHealth;
+        GameEventsManager.instance.uiEvents.onSetStepInstructionText -= SetStepText;
     }
 
     // Start is called before the first frame update
@@ -53,9 +57,13 @@ public class UiManager : MonoBehaviour
         instructionPanel.SetActive(false);
         gameInformation.SetActive(false);
 
+        healthBarGO.SetActive(false);
         basicPackage.SetActive(false);
         fragilePackage.SetActive(false);
         overSizePackage.SetActive(false);
+
+        fullMap.SetActive(false);
+        miniMap.SetActive(false);
     }
 
     private void Update()
@@ -123,20 +131,28 @@ public class UiManager : MonoBehaviour
         switch (packageType)
         {
             case 0:
+                healthBarGO.SetActive(false);
                 basicPackage.SetActive(true);
                 fragilePackage.SetActive(false);
                 overSizePackage.SetActive(false);
                 break;
             case 1:
+                healthBarGO.SetActive(false);
                 basicPackage.SetActive(false);
                 fragilePackage.SetActive(true);
                 overSizePackage.SetActive(false);
                 break;
             case 2:
+                healthBarGO.SetActive(false);
                 basicPackage.SetActive(false);
                 fragilePackage.SetActive(false);
                 overSizePackage.SetActive(true);
                 break;
         }
+    }
+
+    private void SetStepText(string text)
+    {
+        stepInstruction.GetComponent<TMP_Text>().text = text;
     }
 }

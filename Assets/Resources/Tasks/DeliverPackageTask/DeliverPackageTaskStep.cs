@@ -25,7 +25,8 @@ public class DeliverPackageTaskStep : TaskStep
 
     private void Start()
     {
-        GameEventsManager.instance.uiEvents.onActivateIndicator(endPoint.gameObject);
+        //GameEventsManager.instance.uiEvents.onActivateIndicator(endPoint.gameObject);
+        GameEventsManager.instance.uiEvents.SetStepInstructionText("Deliver Package");
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public class DeliverPackageTaskStep : TaskStep
         if (packagesDelivered < amountToDeliver)
         {
             packagesDelivered++;
-            GameEventsManager.instance.uiEvents.onActivateIndicator(startPoint.gameObject);
+            //GameEventsManager.instance.uiEvents.onActivateIndicator(startPoint.gameObject);
             UpdateState();
         }
 

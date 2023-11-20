@@ -24,7 +24,8 @@ public abstract class TaskStep : MonoBehaviour
         {
             isFinished = true;
             GameEventsManager.instance.taskEvents.AdvanceTask(taskId);
-            Destroy(this.gameObject);
+            GameObject parentGO = this.transform.parent.gameObject;
+            Destroy(parentGO);
         }
     }
 

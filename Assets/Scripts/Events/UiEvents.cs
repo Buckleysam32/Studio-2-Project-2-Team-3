@@ -44,4 +44,14 @@ public class UiEvents
             onPackageDamaged(packageCurrentHealth);
         }
     }
+
+    public Action<string> onSetStepInstructionText;
+
+    public void SetStepInstructionText(string text)
+    {
+        if (onSetStepInstructionText != null)
+        {
+            onSetStepInstructionText(text);
+        }
+    }
 }
