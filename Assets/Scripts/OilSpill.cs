@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class OilSpill : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        float rndm = Random.Range(0f, 360f);
+        this.transform.eulerAngles = new Vector3(0,0,rndm);
+    }
+
     /// <summary>
     /// If something with a playercontroller enters, turn on the slippery bool
     /// </summary>
