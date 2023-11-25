@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
     public bool paused = false;
+    public GameObject miniMap;
 
     private void OnEnable()
     {
@@ -47,10 +48,12 @@ public class PauseMenu : MonoBehaviour
         if (paused)
         {
             Time.timeScale = 0;
+            miniMap.SetActive(false);
         }
         else
         {
             Time.timeScale = 1;
+            miniMap.SetActive(true);
         }
     }
 }

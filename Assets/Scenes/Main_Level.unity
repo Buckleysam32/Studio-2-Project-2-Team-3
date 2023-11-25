@@ -42911,6 +42911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 572740032}
   paused: 0
+  miniMap: {fileID: 1231026710}
 --- !u!114 &199761830
 MonoBehaviour:
   m_ObjectHideFlags: 0

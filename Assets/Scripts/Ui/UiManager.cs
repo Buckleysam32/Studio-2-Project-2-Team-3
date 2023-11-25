@@ -77,6 +77,9 @@ public class UiManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M) && mapActivated == false)
         {
             Debug.Log("Open Map");
+
+            Time.timeScale = 0;
+
             miniMap.SetActive(false);
 
             fullMap.SetActive(true);
@@ -87,6 +90,9 @@ public class UiManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.M) && mapActivated == true)
         {
             Debug.Log("Close Map");
+
+            Time.timeScale = 1;
+
             miniMap.SetActive(true);
 
             fullMap.SetActive(false);
