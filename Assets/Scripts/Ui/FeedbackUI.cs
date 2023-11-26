@@ -11,6 +11,7 @@ public class FeedbackUI : MonoBehaviour
     private bool doingFeedback = false;
     private float timePass = 0;
     [SerializeField] float showFeedback; //How long to show the feedback for
+    public bool testFeedbackSys = false;
 
     void Update()
     {
@@ -22,6 +23,20 @@ public class FeedbackUI : MonoBehaviour
                 FeedbackEnd();
             }
         }
+
+        if (testFeedbackSys)
+        {
+            int rndm = Random.Range(1, 3);
+            if (rndm == 1)
+            {
+                FeedbackStart("500", true, true);
+            }
+            if (rndm == 2)
+            {
+                FeedbackStart("300", false, true);
+            }
+            testFeedbackSys = false;
+        }
     }
     /// <summary>
     /// Intended for event, use only the changes, not the sum total.
@@ -29,19 +44,35 @@ public class FeedbackUI : MonoBehaviour
     /// Also sets color of text for if positive or negative, default option being positive.
     /// </summary>
     /// <param name="feedback"></param>
-    public void FeedbackStart(string feedback, bool isPositive = true)
+    public void FeedbackStart(string feedback, bool isPositive = true, bool displayType = true)
     {
-        GameObject textObject = textField.GetComponentInParent<GameObject>();
-        textObject.SetActive(true);
+        textField.gameObject.SetActive(true);
+        string feedbackType = "X";
         if (isPositive)
         {
-            textField.color = new Color(0, 212, 38);
+            textField.color = new Color(0, 0.83f, 0.1f);
+            if (displayType)
+            {
+                feedbackType = "+";
+            }
         }
         else
         {
-            textField.color = new Color(212, 0, 0);
+            textField.color = new Color(0.83f, 0, 0);
+            if (displayType)
+            {
+                feedbackType = "-";
+            }
         }
-        textField.text = textPrefix + feedback;
+        if (!displayType)
+        {
+            textField.text = textPrefix + feedback;
+        }
+        else
+        {
+
+            textField.text = feedbackType + textPrefix + feedback;
+        }
         doingFeedback = true;
     }
     /// <summary>
@@ -52,8 +83,7 @@ public class FeedbackUI : MonoBehaviour
         textField.alpha -= Time.deltaTime;
         if (textField.alpha <= 0)
         {
-            GameObject textObject = textField.GetComponentInParent<GameObject>();
-            textObject.SetActive(false);
+            textField.gameObject.SetActive(false);
             doingFeedback = false;
             timePass = 0;
         }
