@@ -6,6 +6,7 @@ using UnityEngine;
 public class RewardEvents
 {
     public event Action<int> onMoneyGained;
+
     public void MoneyGained(int money)
     {
         if (onMoneyGained != null)

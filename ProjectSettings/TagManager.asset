@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Dynamic
   - MapCamera
+  - Reward Manager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Map Icons
+  - 
   - Water
   - UI
   - 

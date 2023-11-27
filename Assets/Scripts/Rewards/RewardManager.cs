@@ -8,6 +8,9 @@ public class RewardManager : MonoBehaviour
     [Header("Money")]
     public int currentMoney = 0;
 
+    [Header("FeedbackUI")]
+    public FeedbackUI moneyFeedbackUI;
+
     [Header("Timer")]
     public float gameTimeLength = 180f; //the length of the game in seconds 
     public float currentSeconds;
@@ -16,6 +19,27 @@ public class RewardManager : MonoBehaviour
     [Header("Continue")]
     public int continueCost = 500; // how much it costs to continue playing
     public float continueTimeGain = 60f; // how much time you get when continuing 
+
+    /*
+     *      string moneyText;
+            moneyText = money.ToString();
+            bool isPositive;
+            bool displayType;
+            if (money > 0)
+            {
+                isPositive = true;
+                displayType = true;
+
+            }
+            else
+            {
+                isPositive = false;
+                displayType = false;
+            }
+            //Call feedback
+            feedbackUI.FeedbackStart(moneyText, isPositive, displayType);
+     */
+
 
     private void OnEnable()
     {
@@ -42,6 +66,28 @@ public class RewardManager : MonoBehaviour
     {
         currentMoney += money;
         GameEventsManager.instance.rewardEvents.MoneyChange(currentMoney);
+        string moneyText;
+        moneyText = money.ToString();
+        bool isPositive;
+        bool displayType;
+        if (money > 0)
+        {
+            isPositive = true;
+            displayType = true;
+
+        }
+        else
+        {
+            isPositive = false;
+            displayType = false;
+        }
+        //Call feedback
+        if(moneyFeedbackUI != null)
+        {
+            moneyFeedbackUI.FeedbackStart(moneyText, isPositive, displayType);
+        }
+
+
     }
 
     private void TimeGained(float time)
