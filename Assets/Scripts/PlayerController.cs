@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     public int spriteDirection = 8;
     [SerializeField] Animator spriteAnim;
 
+
+    [SerializeField] GameObject impactParticle;
+
     float velocityVsUp = 0;
 
     // Components
@@ -283,6 +286,12 @@ public class PlayerController : MonoBehaviour
 
         
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {;
+        Instantiate<GameObject>(impactParticle, this.transform);
+    }
+
 
     /// <summary>
     /// Applies the player input
