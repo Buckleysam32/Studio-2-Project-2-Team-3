@@ -34,6 +34,7 @@ public class PauseMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P) && paused)
         {
+            Time.timeScale = 1.0f; 
             GameEventsManager.instance.gameEvents.LoadScene(0);
         }
         
