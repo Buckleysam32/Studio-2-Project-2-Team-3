@@ -44286,7 +44286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadTaskState: 0
-  maximumActiveTasks: 1
+  maximumActiveTasks: 2
 --- !u!1 &572740032
 GameObject:
   m_ObjectHideFlags: 0
