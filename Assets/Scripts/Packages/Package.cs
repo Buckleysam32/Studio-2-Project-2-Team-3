@@ -12,6 +12,16 @@ public class Package : MonoBehaviour
     public float moneyModifier = 1f;
     public float timeModifier = 1f;
 
+    private void OnEnable()
+    {
+        GameEventsManager.instance.rewardEvents.onPlayerCrashed += TakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.instance.rewardEvents.onPlayerCrashed -= TakeDamage;
+    }
+
     private void Start()
     {
         RandomisePackageType();
@@ -66,6 +76,11 @@ public class Package : MonoBehaviour
     /// <param name="damage"></param>
     protected virtual void TakeDamage(float damage)
     {
+        if (durability <= 0)
+        {
+            return;
+        }
+
         switch (packageType)
         {
             case PackageType.normal:

@@ -153,6 +153,7 @@ public class TaskManager : MonoBehaviour
         Task task = GetTaskById(id);
         task.InstantiateCurrentTaskStep(this.transform);
         activePackage = Instantiate(task.info.package);
+        GameEventsManager.instance.uiEvents.PickUpPackage((int)task.info.package.packageType);
         ChangeTaskState(task.info.id, TaskState.InProgress);
 
         Debug.Log("Start Task: " + id);
@@ -175,6 +176,8 @@ public class TaskManager : MonoBehaviour
         {
             ChangeTaskState(task.info.id, TaskState.CanFinish);
             GameEventsManager.instance.taskEvents.CompleteTask(id);
+            // turn of package ui
+            GameEventsManager.instance.uiEvents.onPickUpPackage(3);
         }
 
         Debug.Log("Advance Task: " + id);

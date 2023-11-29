@@ -44,4 +44,14 @@ public class RewardEvents
             onTimeChange(time);
         }
     }
+
+    public event Action<float> onPlayerCrashed;
+
+    public void PlayerCrashed(float damage)
+    {
+        if (onPlayerCrashed != null)
+        {
+            onPlayerCrashed(damage);
+        }
+    }
 }

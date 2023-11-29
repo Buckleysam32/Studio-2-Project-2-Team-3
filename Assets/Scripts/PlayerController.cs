@@ -290,6 +290,9 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {;
         Instantiate<GameObject>(impactParticle, this.transform);
+
+        // apply some damage to the current package
+        GameEventsManager.instance.rewardEvents.PlayerCrashed(10f);
     }
 
 

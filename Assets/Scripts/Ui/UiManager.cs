@@ -34,7 +34,7 @@ public class UiManager : MonoBehaviour
         GameEventsManager.instance.rewardEvents.onMoneyChange += UpdateMoney;
         GameEventsManager.instance.uiEvents.onPickUpPackage += SetInitialHealth;
         GameEventsManager.instance.uiEvents.onPickUpPackage += SetPackageTypeIcon;
-        GameEventsManager.instance.uiEvents.onPackageDamaged += UpdateHealth;
+        GameEventsManager.instance.rewardEvents.onPlayerCrashed += UpdateHealth;
         GameEventsManager.instance.uiEvents.onSetStepInstructionText += SetStepText;
 
     }
@@ -45,7 +45,7 @@ public class UiManager : MonoBehaviour
         GameEventsManager.instance.rewardEvents.onMoneyChange -= UpdateMoney;
         GameEventsManager.instance.uiEvents.onPickUpPackage -= SetInitialHealth;
         GameEventsManager.instance.uiEvents.onPickUpPackage -= SetPackageTypeIcon;
-        GameEventsManager.instance.uiEvents.onPackageDamaged -= UpdateHealth;
+        GameEventsManager.instance.rewardEvents.onPlayerCrashed -= UpdateHealth;
         GameEventsManager.instance.uiEvents.onSetStepInstructionText -= SetStepText;
     }
 
@@ -121,14 +121,14 @@ public class UiManager : MonoBehaviour
 
     public void SetInitialHealth(int maxHealth)
     {
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
+        healthBar.maxValue = 100f;
+        healthBar.value = 100f;
         healthFill.color = gradient.Evaluate(1f);
     }
 
-    public void UpdateHealth(int currentHealth)
+    public void UpdateHealth(float damage)
     {
-        healthBar.value = currentHealth;
+        healthBar.value -= damage;
         healthFill.color = gradient.Evaluate(healthBar.normalizedValue);
     }
 
@@ -137,22 +137,29 @@ public class UiManager : MonoBehaviour
         switch (packageType)
         {
             case 0:
-                healthBarGO.SetActive(false);
+                healthBarGO.SetActive(true);
                 basicPackage.SetActive(true);
                 fragilePackage.SetActive(false);
                 overSizePackage.SetActive(false);
                 break;
             case 1:
-                healthBarGO.SetActive(false);
+                healthBarGO.SetActive(true);
                 basicPackage.SetActive(false);
                 fragilePackage.SetActive(true);
                 overSizePackage.SetActive(false);
                 break;
             case 2:
-                healthBarGO.SetActive(false);
+                healthBarGO.SetActive(true);
                 basicPackage.SetActive(false);
                 fragilePackage.SetActive(false);
                 overSizePackage.SetActive(true);
+                break;
+            case 3:
+                Debug.Log("Turning off package icon ui");
+                healthBarGO.SetActive(false);
+                basicPackage.SetActive(false);
+                fragilePackage.SetActive(false);
+                overSizePackage.SetActive(false);
                 break;
         }
     }
