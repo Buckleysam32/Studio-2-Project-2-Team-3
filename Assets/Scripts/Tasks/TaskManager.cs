@@ -300,7 +300,7 @@ public class TaskManager : MonoBehaviour
 
     private void MaintainActiveTasks()
     {
-        if (activeTasks.Count < maximumActiveTasks)
+        while (activeTasks.Count < maximumActiveTasks)
         {
             // currently selects a task at random
             // could potentially prioritise those closest to player 
