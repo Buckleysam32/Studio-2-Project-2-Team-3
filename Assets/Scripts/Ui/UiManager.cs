@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     public GameObject continuePanel;
+    public GameObject insufficientFundsText;
     public GameObject pausePanel;
     public GameObject instructionPanel;
     public GameObject gameInformation;
@@ -53,6 +54,7 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         continuePanel.SetActive(false);
+        insufficientFundsText.SetActive(false);
         pausePanel.SetActive(false);
         instructionPanel.SetActive(false);
         gameInformation.SetActive(false);

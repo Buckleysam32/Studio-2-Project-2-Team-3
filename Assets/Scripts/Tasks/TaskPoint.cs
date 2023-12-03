@@ -38,7 +38,7 @@ public class TaskPoint : MonoBehaviour
 
     private void Update()
     {
-        //just being used to check if its worked, this should go into an actual input system
+        //just being used to check if it worked, this should go into an actual input system
         //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
         //{
         //    GameEventsManager.instance.inputEvents.SubmitPressed();
@@ -46,16 +46,16 @@ public class TaskPoint : MonoBehaviour
     }
 
 
-    private void SubmitPressed()
+    private void SubmitPressed(string id)
     {
         // start or finish a task
         if (currentTaskState.Equals(TaskState.CanStart) && startPoint)
         {
-            GameEventsManager.instance.taskEvents.StartTask(taskId);
+            GameEventsManager.instance.taskEvents.StartTask(id);
         }
         else if (currentTaskState.Equals(TaskState.CanFinish) && endPoint)
         {
-            GameEventsManager.instance.taskEvents.CompleteTask(taskId);
+            GameEventsManager.instance.taskEvents.CompleteTask(id);
         }
     }
 
@@ -77,7 +77,7 @@ public class TaskPoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && currentTaskState.Equals(TaskState.CanStart))
         {
-            GameEventsManager.instance.inputEvents.SubmitPressed();
+            GameEventsManager.instance.inputEvents.SubmitPressed(taskId);
             // turn off the visuals
             GameObject childGO = transform.GetChild(0).gameObject;
             childGO.SetActive(false);

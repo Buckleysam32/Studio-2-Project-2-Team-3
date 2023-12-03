@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class InputEvents 
 {
-    public event Action onSubmitPressed;
+    public event Action<string> onSubmitPressed;
 
     /// <summary>
     /// called when the player presses the submit button
     /// </summary>
-    public void SubmitPressed()
+    public void SubmitPressed(string id)
     {
         if (onSubmitPressed != null)
         {
-            onSubmitPressed();
+            onSubmitPressed(id);
         }
     }
 

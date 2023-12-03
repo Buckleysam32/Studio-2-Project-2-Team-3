@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public UiManager uiManager;
     private Coroutine startRoutine;
     public PlayerController playerController;
+    public bool isGameOverScreen;
 
     private void OnEnable()
     {
@@ -69,6 +70,8 @@ public class GameManager : MonoBehaviour
         // pause time
         Time.timeScale = 0;
 
+        isGameOverScreen = true;
+
         // check if player has enough money to keep playing
         if (rewardManager.currentMoney >= rewardManager.continueCost)
         {
@@ -86,11 +89,26 @@ public class GameManager : MonoBehaviour
     private void ContinueGame()
     {
         Time.timeScale = 1;
+        isGameOverScreen = false;
         // need to check if the player has enough money before deducting
-        GameEventsManager.instance.rewardEvents.MoneyGained(-rewardManager.continueCost);
-        GameEventsManager.instance.rewardEvents.TimeGained(rewardManager.continueTimeGain);
-        GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
-        uiManager.continuePanel.SetActive(false);
+        if (rewardManager.currentMoney >= rewardManager.continueCost)
+        {
+            // we have enough money
+            // deduct the money cost
+            GameEventsManager.instance.rewardEvents.MoneyGained(-rewardManager.continueCost);
+            // give them some extra time
+            GameEventsManager.instance.rewardEvents.TimeGained(rewardManager.continueTimeGain);
+            //restart the timer
+            GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
+            // turn off the continue panel
+            uiManager.continuePanel.SetActive(false);
+        }
+        else
+        {
+            //we dont have enough money to continue
+            uiManager.insufficientFundsText.SetActive(true);
+        }
+
     }
 
     private void GameOver()
