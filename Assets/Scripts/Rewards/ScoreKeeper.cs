@@ -9,11 +9,25 @@ public class ScoreKeeper : MonoBehaviour
     private int highscore0;
     private int highscore1;
     private int highscore2;
+    private int highscore3;
+    private int highscore4;
+    private int highscore5;
+    private int highscore6;
+    private int highscore7;
+    private int highscore8;
+    private int highscore9;
 
     public GameObject highscorePanel;
     public TMP_Text highscore0Text;
     public TMP_Text highscore1Text;
     public TMP_Text highscore2Text;
+    public TMP_Text highscore3Text;
+    public TMP_Text highscore4Text;
+    public TMP_Text highscore5Text;
+    public TMP_Text highscore6Text;
+    public TMP_Text highscore7Text;
+    public TMP_Text highscore8Text;
+    public TMP_Text highscore9Text;
 
     public void OnEnable()
     {
@@ -32,19 +46,61 @@ public class ScoreKeeper : MonoBehaviour
         if (PlayerPrefs.HasKey("Highscore0"))
         {
             highscore0 = PlayerPrefs.GetInt("Highscore0");
-            highscore0Text.text = "1st : $" +highscore0;
+            highscore0Text.text = "1st : " +highscore0;
         }
 
         if (PlayerPrefs.HasKey("Highscore1"))
         {
             highscore1 = PlayerPrefs.GetInt("Highscore1");
-            highscore1Text.text = "2nd : $" + highscore1;
+            highscore1Text.text = "2nd : " + highscore1;
         }
 
         if (PlayerPrefs.HasKey("Highscore2"))
         {
             highscore2 = PlayerPrefs.GetInt("Highscore2");
-            highscore2Text.text = "3rd : $" + highscore2;
+            highscore2Text.text = "3rd : " + highscore2;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore3"))
+        {
+            highscore3 = PlayerPrefs.GetInt("Highscore3");
+            highscore3Text.text = "4th : " + highscore3;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore4"))
+        {
+            highscore4 = PlayerPrefs.GetInt("Highscore4");
+            highscore4Text.text = "5th : " + highscore4;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore5"))
+        {
+            highscore5 = PlayerPrefs.GetInt("Highscore5");
+            highscore5Text.text = "6th : " + highscore5;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore6"))
+        {
+            highscore6 = PlayerPrefs.GetInt("Highscore6");
+            highscore6Text.text = "7th : " + highscore6;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore7"))
+        {
+            highscore7 = PlayerPrefs.GetInt("Highscore7");
+            highscore7Text.text = "8th : " + highscore7;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore8"))
+        {
+            highscore8 = PlayerPrefs.GetInt("Highscore8");
+            highscore8Text.text = "9th : " + highscore8;
+        }
+
+        if (PlayerPrefs.HasKey("Highscore9"))
+        {
+            highscore9 = PlayerPrefs.GetInt("Highscore9");
+            highscore9Text.text = "10th: " + highscore9;
         }
     }
 
@@ -61,8 +117,8 @@ public class ScoreKeeper : MonoBehaviour
         scoreList.Sort();
         // reverse the list since we want the highest values
         scoreList.Reverse();
-        //remove all entries except the top 3
-        for (int i = scoreList.Count; i > 3; i--)
+        //remove all entries except the top 10
+        for (int i = scoreList.Count; i > 10; i--)
         {
             scoreList.Remove(i);
         }
@@ -87,6 +143,35 @@ public class ScoreKeeper : MonoBehaviour
             else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore2"))
             {
                 PlayerPrefs.SetInt($"Highscore2", scoreList[i]);
+            }
+            // You get the point, go through all until 10th
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore3"))
+            {
+                PlayerPrefs.SetInt($"Highscore3", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore4"))
+            {
+                PlayerPrefs.SetInt($"Highscore4", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore5"))
+            {
+                PlayerPrefs.SetInt($"Highscore5", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore6"))
+            {
+                PlayerPrefs.SetInt($"Highscore6", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore7"))
+            {
+                PlayerPrefs.SetInt($"Highscore7", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore8"))
+            {
+                PlayerPrefs.SetInt($"Highscore8", scoreList[i]);
+            }
+            else if (scoreList[i] > PlayerPrefs.GetInt($"Highscore9"))
+            {
+                PlayerPrefs.SetInt($"Highscore9", scoreList[i]);
             }
         }
     }

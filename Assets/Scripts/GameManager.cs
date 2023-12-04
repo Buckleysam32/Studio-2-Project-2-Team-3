@@ -88,12 +88,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ContinueGame()
     {
-        Time.timeScale = 1;
-        isGameOverScreen = false;
+        
         // need to check if the player has enough money before deducting
         if (rewardManager.currentMoney >= rewardManager.continueCost)
         {
             // we have enough money
+            Time.timeScale = 1; //unfreeze time
+            isGameOverScreen = false;
+
             // deduct the money cost
             GameEventsManager.instance.rewardEvents.MoneyGained(-rewardManager.continueCost);
             // give them some extra time
@@ -117,7 +119,7 @@ public class GameManager : MonoBehaviour
 
         //set highscore
         GameEventsManager.instance.gameEvents.SetHighScore(rewardManager.currentMoney);
-        
+        Time.timeScale = 1; //unfreeze time
         // return to main menu
         GameEventsManager.instance.gameEvents.LoadScene(0);
     }

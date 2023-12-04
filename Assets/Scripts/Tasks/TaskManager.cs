@@ -206,7 +206,10 @@ public class TaskManager : MonoBehaviour
 
     private void ClaimRewards(Task task)
     {
-        GameEventsManager.instance.rewardEvents.MoneyGained(activePackage.moneyReward);
+        float remainingDurability = activePackage.durability;               //To calculate the percentage of a number...
+        float actualReward = remainingDurability / (float) activePackage.moneyReward;     //divide the number by the whole...
+        actualReward = actualReward * 100;                                      //then multiply by 100 to get the percentage.
+        GameEventsManager.instance.rewardEvents.MoneyGained((int) actualReward);
         GameEventsManager.instance.rewardEvents.TimeGained(activePackage.timeReward);
     }
 
