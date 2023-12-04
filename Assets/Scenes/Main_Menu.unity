@@ -3449,13 +3449,13 @@ MonoBehaviour:
   highscore0Text: {fileID: 498582846}
   highscore1Text: {fileID: 375338186}
   highscore2Text: {fileID: 231992014}
-  highscore3Text: {fileID: 0}
-  highscore4Text: {fileID: 0}
-  highscore5Text: {fileID: 0}
-  highscore6Text: {fileID: 0}
-  highscore7Text: {fileID: 0}
-  highscore8Text: {fileID: 0}
-  highscore9Text: {fileID: 0}
+  highscore3Text: {fileID: 1539476056}
+  highscore4Text: {fileID: 1049713956}
+  highscore5Text: {fileID: 1676317306}
+  highscore6Text: {fileID: 550016006}
+  highscore7Text: {fileID: 1183086162}
+  highscore8Text: {fileID: 503866836}
+  highscore9Text: {fileID: 763220872}
 --- !u!1 &946455073
 GameObject:
   m_ObjectHideFlags: 0
