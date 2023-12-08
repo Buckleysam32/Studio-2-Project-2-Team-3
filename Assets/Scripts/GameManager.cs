@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartRoutine()
     {
+        // play background music
+        GameEventsManager.instance.audioEvents.Play("Mus_OpenTrip");
+
         // take away movement from player
         float tempMaxSpeed = playerController.maxSpeed;
         playerController.maxSpeed = 0;

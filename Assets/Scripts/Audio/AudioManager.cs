@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource backgroundMusicAudioSource;
     public AudioSource soundEffectAudioSource;
+    private bool isPlayed; // is there a sound being played
 
     private Dictionary <string, AudioClip> audioFiles;
 
@@ -48,18 +49,6 @@ public class AudioManager : MonoBehaviour
         return soundEffectsDictionary;
     }
 
-    public void PlayOneShot(string name)
-    {
-        if (audioFiles.TryGetValue(name, out AudioClip clip))
-        {
-            soundEffectAudioSource.PlayOneShot(audioFiles[name]);
-        }
-        else
-        {
-            Debug.Log("Audio clip not found with name :" + name);
-        }
-    }
-
     public void Play(string name)
     {
         if (audioFiles.TryGetValue(name, out AudioClip clip))
@@ -74,10 +63,40 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayOneShot(string name)
+    {
+        if (audioFiles.TryGetValue(name, out AudioClip clip))
+        {
+            if (!isPlayed)
+            {
+                soundEffectAudioSource.PlayOneShot(audioFiles[name]);
+                isPlayed = true;
+            }
+
+            StartCoroutine(waitForSound());
+        }
+        else
+        {
+            Debug.Log("Audio clip not found with name :" + name);
+        }
+    }
+
     public void Stop()
     {
         backgroundMusicAudioSource?.Stop();
         soundEffectAudioSource?.Stop();
+    }
+
+    private IEnumerator waitForSound()
+    {
+        //wait until sound has finished playing
+        while (soundEffectAudioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // audio has finished playing
+        isPlayed = false;
     }
 
 }

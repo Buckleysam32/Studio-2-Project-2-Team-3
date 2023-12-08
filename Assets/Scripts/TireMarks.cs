@@ -21,6 +21,7 @@ public class TireMarks : MonoBehaviour
         if (playerController.IsLeavingMark(out float lateralVelocity, out bool isBraking))
         {
             trailRenderer.emitting = true;
+            GameEventsManager.instance.audioEvents.PlayOneShot("CarScreechHD");
         }
         else
         {
