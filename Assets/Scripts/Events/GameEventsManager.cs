@@ -18,6 +18,8 @@ public class GameEventsManager : MonoBehaviour
 
     public UiEvents uiEvents;
 
+    public AudioEvents audioEvents;
+
     private void Awake()
     {
         if (instance != null)
@@ -33,6 +35,7 @@ public class GameEventsManager : MonoBehaviour
         inputEvents = new InputEvents();
         gameEvents = new GameEvents();
         uiEvents = new UiEvents();
+        audioEvents = new AudioEvents();
     }
 
 }
