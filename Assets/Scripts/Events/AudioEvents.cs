@@ -18,6 +18,19 @@ public class AudioEvents
         }
     }
 
+    public event Action<string> onPlayPriorityOneShot;
+    /// <summary>
+    /// Plays a oneshot of the sound effect
+    /// </summary>
+    /// <param name="name"></param>
+    public void PlayPriorityOneShot(string name)
+    {
+        if (onPlayPriorityOneShot != null)
+        {
+            onPlayPriorityOneShot(name);
+        }
+    }
+
     public event Action<string> onPlay;
     /// <summary>
     /// plays audioclip on loop

@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.audioEvents.onPlayOneShot += PlayOneShot;
+        GameEventsManager.instance.audioEvents.onPlayPriorityOneShot += PlayPriorityOneShot;
         GameEventsManager.instance.audioEvents.onPlay += Play;
         GameEventsManager.instance.audioEvents.onStop += Stop; 
     }
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
     private void OnDisable()
     {
         GameEventsManager.instance.audioEvents.onPlayOneShot -= PlayOneShot;
+        GameEventsManager.instance.audioEvents.onPlayPriorityOneShot -= PlayPriorityOneShot;
         GameEventsManager.instance.audioEvents.onPlay -= Play;
         GameEventsManager.instance.audioEvents.onStop -= Stop;
     }
@@ -74,6 +76,22 @@ public class AudioManager : MonoBehaviour
             }
 
             StartCoroutine(waitForSound());
+        }
+        else
+        {
+            Debug.Log("Audio clip not found with name :" + name);
+        }
+    }
+
+    /// <summary>
+    /// Used to override the wait for sound coroutine to play sounds
+    /// </summary>
+    /// <param name="name"></param>
+    public void PlayPriorityOneShot(string name)
+    {
+        if (audioFiles.TryGetValue(name, out AudioClip clip))
+        {
+            soundEffectAudioSource.PlayOneShot(audioFiles[name]);
         }
         else
         {

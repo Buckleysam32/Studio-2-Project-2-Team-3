@@ -293,8 +293,8 @@ public class PlayerController : MonoBehaviour
 
         // apply some damage to the current package
         GameEventsManager.instance.rewardEvents.PlayerCrashed(10f);
-
-        GameEventsManager.instance.audioEvents.PlayOneShot("CrashCollision");
+        // play crash sound
+        GameEventsManager.instance.audioEvents.PlayPriorityOneShot("CrashCollision");
     }
 
 
