@@ -116,11 +116,11 @@ public class PlayerController : MonoBehaviour
                 rndm = Random.Range(0, 2);
                 if (rndm == 1)
                 {
-                    steeringInput = 2f;
+                    steeringInput = 8f;
                 }
                 else
                 {
-                    steeringInput = -2f;
+                    steeringInput = -8f;
                 }
             }
         }
