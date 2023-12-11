@@ -13,6 +13,7 @@ public class DeliverPackageTaskStep : TaskStep
     public StartPoint startPoint;
     public EndPoint endPoint;
 
+
     private void OnEnable()
     {
         GameEventsManager.instance.taskEvents.onPackageDelivery += DeliverPackage;
@@ -27,6 +28,7 @@ public class DeliverPackageTaskStep : TaskStep
     {
         //GameEventsManager.instance.uiEvents.onActivateIndicator(endPoint.gameObject);
         GameEventsManager.instance.uiEvents.SetStepInstructionText("Deliver Package");
+
     }
 
     /// <summary>

@@ -16,6 +16,8 @@ public class TaskManager : MonoBehaviour
     private List<Task> innactiveTasks = new List<Task>(); // this is a list of the innactive tasks
     private Package activePackage;
 
+    public TargetIndicator targetIndicator;
+
     private void Awake()
     {
         taskMap =  CreateTaskMap();

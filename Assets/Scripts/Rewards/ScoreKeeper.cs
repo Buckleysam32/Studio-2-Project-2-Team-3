@@ -41,6 +41,17 @@ public class ScoreKeeper : MonoBehaviour
     public TMP_Text highscore8Text;
     public TMP_Text highscore9Text;
 
+    public TMP_Text highscore0NameText;
+    public TMP_Text highscore1NameText;
+    public TMP_Text highscore2NameText;
+    public TMP_Text highscore3NameText;
+    public TMP_Text highscore4NameText;
+    public TMP_Text highscore5NameText;
+    public TMP_Text highscore6NameText;
+    public TMP_Text highscore7NameText;
+    public TMP_Text highscore8NameText;
+    public TMP_Text highscore9NameText;
+
     public TMP_InputField initialField;
 
     public void OnEnable()
@@ -62,70 +73,82 @@ public class ScoreKeeper : MonoBehaviour
         {
             highscore0 = PlayerPrefs.GetInt("Highscore0");
             highscore0Initial = PlayerPrefs.GetString("Highscore0Inital");
-            highscore0Text.text = "1st : " + highscore0 + " " + highscore0Initial;
+            highscore0Text.text = highscore0.ToString();
+            highscore0NameText.text = highscore0Initial.ToString();
+
+
         }
 
         if (PlayerPrefs.HasKey("Highscore1"))
         {
             highscore1 = PlayerPrefs.GetInt("Highscore1");
             highscore1Initial = PlayerPrefs.GetString("Highscore1Inital");
-            highscore1Text.text = "2nd : " + highscore1 + " " + highscore1Initial;
+            highscore1Text.text = highscore1.ToString();
+            highscore1NameText.text = highscore1Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore2"))
         {
             highscore2 = PlayerPrefs.GetInt("Highscore2");
             highscore2Initial = PlayerPrefs.GetString("Highscore2Inital");
-            highscore2Text.text = "3rd : " + highscore2 + " " + highscore2Initial;
+            highscore2Text.text = highscore2.ToString();
+            highscore2NameText.text = highscore2Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore3"))
         {
             highscore3 = PlayerPrefs.GetInt("Highscore3");
             highscore3Initial = PlayerPrefs.GetString("Highscore3Inital");
-            highscore3Text.text = "4th : " + highscore3 + " " + highscore3Initial;
+            highscore3Text.text = highscore3.ToString();
+            highscore3NameText.text = highscore3Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore4"))
         {
             highscore4 = PlayerPrefs.GetInt("Highscore4");
             highscore4Initial = PlayerPrefs.GetString("Highscore4Inital");
-            highscore4Text.text = "5th : " + highscore4 + " " + highscore4Initial;
+            highscore4Text.text = highscore4.ToString();
+            highscore4NameText.text = highscore4Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore5"))
         {
             highscore5 = PlayerPrefs.GetInt("Highscore5");
             highscore5Initial = PlayerPrefs.GetString("Highscore5Inital");
-            highscore5Text.text = "6th : " + highscore5 + " " + highscore5Initial;
+            highscore5Text.text = highscore5.ToString();
+            highscore5NameText.text = highscore5Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore6"))
         {
             highscore6 = PlayerPrefs.GetInt("Highscore6");
             highscore6Initial = PlayerPrefs.GetString("Highscore6Inital");
-            highscore6Text.text = "7th : " + highscore6 + " " + highscore6Initial;
+            highscore6Text.text = highscore6.ToString();
+            highscore6NameText.text = highscore6Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore7"))
         {
             highscore7 = PlayerPrefs.GetInt("Highscore7");
             highscore7Initial = PlayerPrefs.GetString("Highscore7Inital");
-            highscore7Text.text = "8th : " + highscore7 + " " + highscore7Initial;
+            highscore7Text.text = highscore7.ToString();
+            highscore7NameText.text = highscore7Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore8"))
         {
             highscore8 = PlayerPrefs.GetInt("Highscore8");
             highscore8Initial = PlayerPrefs.GetString("Highscore8Inital");
-            highscore8Text.text = "9th : " + highscore8 + " " + highscore8Initial;
+            highscore8Text.text = highscore8.ToString();
+            highscore8NameText.text = highscore8Initial.ToString();
         }
 
         if (PlayerPrefs.HasKey("Highscore9"))
         {
             highscore9 = PlayerPrefs.GetInt("Highscore9");
             highscore9Initial = PlayerPrefs.GetString("Highscore9Inital");
-            highscore9Text.text = "10th: " + highscore9 + " " + highscore9Initial;
+            highscore9Text.text = highscore9.ToString();
+            highscore9NameText.text = highscore9Initial.ToString();
         }
     }
 

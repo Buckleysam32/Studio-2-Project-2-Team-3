@@ -18,10 +18,13 @@ public class TaskPoint : MonoBehaviour
     [SerializeField] private bool startPoint = false;
     [SerializeField] private bool endPoint = false;
 
+    public TargetIndicator indicater;
+
     private void Awake()
     {
         taskId = taskInfoSOForPoint.id;
         //taskIcon = GetComponentInChildren<TaskIcon>();
+        indicater = GameObject.FindGameObjectWithTag("Indicator").GetComponent<TargetIndicator>();
     }
 
     private void OnEnable()
@@ -68,7 +71,8 @@ public class TaskPoint : MonoBehaviour
             //taskIcon.SetState(currentTaskState, startPoint, endPoint);
             if (currentTaskState.Equals(TaskState.CanStart))
             {
-               transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(0).gameObject.SetActive(true);
+                indicater.Target = transform.GetChild(0);
             }
         }
     }
