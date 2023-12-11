@@ -28,12 +28,13 @@ public class PauseMenu : MonoBehaviour
             GameEventsManager.instance.inputEvents.PausePressed();
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Q) && paused)
         {
             GameEventsManager.instance.gameEvents.QuitGame();
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.P) && paused)
+        if (Input.GetKeyDown(KeyCode.Q) && paused)
         {
             GameEventsManager.instance.inputEvents.PausePressed();
             rewardsManagerScript.currentSeconds = 1;

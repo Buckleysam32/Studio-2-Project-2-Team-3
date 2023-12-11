@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
         GameEventsManager.instance.gameEvents.GameStart();
     }
 
+    public void CloseInstructionPanel()
+    {
+        uiManager.instructionPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     private void GameStart()
     {
         Time.timeScale = 1.0f; // just incase we didnt unpause from pause menu or from game overscreen      
@@ -44,17 +50,11 @@ public class GameManager : MonoBehaviour
     {
         // play background music
         GameEventsManager.instance.audioEvents.Play("Mus_OpenTrip");
-
         // take away movement from player
         float tempMaxSpeed = playerController.maxSpeed;
         playerController.maxSpeed = 0;
         //show instructions
         uiManager.instructionPanel.SetActive(true);
-
-        yield return new WaitForSeconds(5);
-
-        // get rid of instructions
-        uiManager.instructionPanel.SetActive(false);
         // turn on game information UI
         uiManager.gameInformation.SetActive(true);
         // reset max speed
@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
         //start timer
         GameEventsManager.instance.gameEvents.TimerStart(rewardManager.currentSeconds);
         uiManager.miniMap.SetActive(true);
+
+        Time.timeScale = 0;
 
         yield return null;
     }
