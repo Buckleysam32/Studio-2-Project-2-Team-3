@@ -56,6 +56,7 @@ public class ScoreKeeper : MonoBehaviour
     public void Start()
     {
         // initialize the highscores
+        initialField.characterLimit = 3;
 
         if (PlayerPrefs.HasKey("Highscore0"))
         {
