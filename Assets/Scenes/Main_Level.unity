@@ -53925,6 +53925,16 @@ MonoBehaviour:
   highscore7Text: {fileID: 1049648198}
   highscore8Text: {fileID: 298173019}
   highscore9Text: {fileID: 1854202755}
+  highscore0NameText: {fileID: 0}
+  highscore1NameText: {fileID: 0}
+  highscore2NameText: {fileID: 0}
+  highscore3NameText: {fileID: 0}
+  highscore4NameText: {fileID: 0}
+  highscore5NameText: {fileID: 0}
+  highscore6NameText: {fileID: 0}
+  highscore7NameText: {fileID: 0}
+  highscore8NameText: {fileID: 0}
+  highscore9NameText: {fileID: 0}
   initialField: {fileID: 1417449502}
 --- !u!114 &180790875
 MonoBehaviour:
@@ -57924,6 +57934,16 @@ MonoBehaviour:
   highscore7Text: {fileID: 1049648198}
   highscore8Text: {fileID: 298173019}
   highscore9Text: {fileID: 1854202755}
+  highscore0NameText: {fileID: 0}
+  highscore1NameText: {fileID: 0}
+  highscore2NameText: {fileID: 0}
+  highscore3NameText: {fileID: 0}
+  highscore4NameText: {fileID: 0}
+  highscore5NameText: {fileID: 0}
+  highscore6NameText: {fileID: 0}
+  highscore7NameText: {fileID: 0}
+  highscore8NameText: {fileID: 0}
+  highscore9NameText: {fileID: 0}
   initialField: {fileID: 0}
 --- !u!1 &878293367
 GameObject:
@@ -60199,7 +60219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -60619,8 +60639,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 448.27}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 185.38}
+  m_SizeDelta: {x: 48.4, y: 45.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415796164
 MonoBehaviour:
