@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OilSpill : MonoBehaviour
 {
-
+    [SerializeField] GameObject oilParticle;
     private void Awake()
     {
         float rndm = Random.Range(0f, 360f);
@@ -21,6 +21,7 @@ public class OilSpill : MonoBehaviour
         {
             enableBool = collision.GetComponent<PlayerController>();
             enableBool.slippery = true;
+            Instantiate<GameObject>(oilParticle, collision.transform);
         }
     }
     /// <summary>
