@@ -12,6 +12,12 @@ public class Task
     public TaskState state;
     public int currentTaskStepIndex;
     private TaskStepState[] taskStepStates;
+    //public TargetIndicator indicater;
+
+    public void Awake()
+    {
+        //indicater = GameObject.FindGameObjectWithTag("Indicator").GetComponent<TargetIndicator>();
+    }
 
     //constructor for making a new task 
     public Task(TaskInfoSO taskInfo)
@@ -74,6 +80,7 @@ public class Task
         {
             // could do object pooling here if performance is an issue
            TaskStep taskStep = UnityEngine.Object.Instantiate<GameObject>(taskStepPrefab, parentTransform).GetComponentInChildren<TaskStep>();
+            //indicater.Target = taskStep.transform;
             // initialise the step state, incase we're loading data
             taskStep.InitialiseTaskStep(info.id, currentTaskStepIndex, taskStepStates[currentTaskStepIndex].state);
         }

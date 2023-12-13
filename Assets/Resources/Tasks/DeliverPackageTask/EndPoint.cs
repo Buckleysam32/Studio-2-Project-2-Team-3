@@ -5,6 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class EndPoint : MonoBehaviour
 {
+    public TargetIndicator indicater;
+
+    public void Awake()
+    {
+        indicater = GameObject.FindGameObjectWithTag("Indicator").GetComponent<TargetIndicator>();
+    }
+
+    public void Start()
+    {
+        indicater.Target = this.transform;
+    }
+
     // this is the collider for the delivery point
     private void OnTriggerEnter2D(Collider2D collision)
     {

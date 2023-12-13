@@ -17,6 +17,8 @@ public class UiManager : MonoBehaviour
 
     public bool mapActivated = false;
 
+    public GameManager gameManager;
+
     public TMP_Text timerText;
     public TMP_Text moneyText;
 
@@ -76,7 +78,7 @@ public class UiManager : MonoBehaviour
 
     public void ControlMap()
     {
-        if (Input.GetKeyDown(KeyCode.M) && mapActivated == false)
+        if (Input.GetKeyDown(KeyCode.M) && mapActivated == false && gameManager.isGameOverScreen == false)
         {
             Debug.Log("Open Map");
 
@@ -89,7 +91,7 @@ public class UiManager : MonoBehaviour
             mapActivated = true;
 
         }
-        else if (Input.GetKeyDown(KeyCode.M) && mapActivated == true)
+        else if (Input.GetKeyDown(KeyCode.M) && mapActivated == true && gameManager.isGameOverScreen == false)
         {
             Debug.Log("Close Map");
 
